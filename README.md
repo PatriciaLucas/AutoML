@@ -22,4 +22,11 @@ Projeto de Tese desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/)
 
 
 **Mapa mental:**
-
+```latex {cmd=true hide=true}
+\documentclass{standalone}
+\usetikzlibrary {mindmap}
+\tikz[mindmap,concept color=blue!80]
+  \node [concept] {Root concept}
+    child[concept color=red,grow=30] {node[concept] {Child concept}}
+    child[concept color=orange,grow=0]  {node[concept] {Child concept}};
+\end{document}

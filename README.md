@@ -30,3 +30,4 @@ Projeto de Tese desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/)
     child[concept color=red,grow=30] {node[concept] {Child concept}}
     child[concept color=orange,grow=0]  {node[concept] {Child concept}};
 \end{document}
+```

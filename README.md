@@ -29,7 +29,7 @@ Durante o mestrado pude trabalhar com técnicas diferentes de previsão de séri
 	
 </p></details>
 
-<details><summary>Principais contribuições a serem geradas:</summary><p>
+<details><summary>Principais contribuições:</summary><p>
 	
 Espera-se que esta pesquisa apresente contribuições para os campos de pesquisa de Previsão de séries temporais e AutoML, tendo como contribuição mais relevante o desenvolvimento de novas metodologias de AutoML, incluindo a otimização de hiperparâmetros, procedimentos de pré-processamento automáticos, procedimentos de decomposição de séries e otimização de modelos de previsão de séries temporais.
 	

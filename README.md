@@ -38,5 +38,13 @@ Essas novas metodologias serão implementadas em um framework AutoML de código 
 	
 </p></details>
 
-**Mapa da pesquisa:**
-
+**Mapa da pesquisa:** :rocket:
+### AutoML
+- Componentes
+	- Seleção de modelos
+	- Otimização de hiperparâmetros
+	- Engenharia de recursos
+- Séries Temporais
+	- Datasets
+	- Frameworks
+	- PyFTS

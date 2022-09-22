@@ -13,7 +13,7 @@ Projeto de Tese desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/)
 
 
 **Motivação:**
-
+[[MORE]]
 
 	
 **Principais contribuições a serem geradas**
@@ -21,9 +21,5 @@ Projeto de Tese desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/)
 	
 
 
-**Mapa mental:**
-```tikz 
-	\usetikzlibrary {mindmap}
-	\tikz[mindmap,concept color=red!50] 
-	\node [concept] {Some concept};
-```
+**Mapa da pesquisa:**
+

@@ -39,7 +39,7 @@ Essas novas metodologias serão implementadas em um framework AutoML de código 
 
 ## Mapa da pesquisa 
 
-### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md) :rocket:
+### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md) :triangular_flag_on_post:
 - Componentes
 	- [Seleção de modelos](https://github.com/PatriciaLucas/AutoML/blob/main/selecao_modelos.md)
 	- [Otimização de hiperparâmetros](https://github.com/PatriciaLucas/AutoML/blob/main/otimizacao_hiperparametros)

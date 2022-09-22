@@ -19,7 +19,6 @@ A previsão de séries temporais é um problema de grande importância prática,
 
 Além das questões que levaram ao surgimento de métodos AutoML já apresentadas, a previsão de séries temporais ainda requer habilidades técnicas específicas para lidar com as características peculiares desses dados como: tendência, sazonalidade, outliers, desvios e mudanças abruptas \citep{Paldino2021DoesForecasting}. O desafio de trabalhar com dados temporais fica evidente em competições como a M4\footnote{Última de uma série influente de competições de previsão organizadas por Spyros Makridakis desde 1982.} \citep{Makridakis2018TheForward}. Ao contrário de áreas como a visão computacional, a competição chega a conclusão de que ainda existem evidências de que algoritmos de ML e \textit{deep learning} (DL) lutam para superar as abordagens estatísticas clássicas de previsão de séries temporais.
 	
-
 Muitas ferramentas que automatizam tarefas de previsão de séries temporais já foram propostas. Porém, essas soluções estão longe de serem universais, já que é inviável incorporar todos os modelos disponíveis em apenas uma aplicação. Além disso, essas soluções não implementam todas as formas de previsão (pontual, intervalar e probabilística) e algumas trabalham apenas com séries temporais univariadas. Em \cite{Hyndman2008AutomaticR}, por exemplo, o foco são métodos clássicos, como ARIMA e suavização exponencial. A DeepAR da Amazon \citep{Salinas2020DeepAR:Networks} apresenta uma solução com redes recorrentes autoregressivas profundas para previsão probabilística. Em \cite{Oreshkin2019N-BEATS:Forecasting} a proposta é um modelo híbrido de modelos DL e autoregressivos para o problema de previsão pontual de séries temporais univariadas. 
 	
 Outro ponto importante é que muitas ferramentas não foram feitas especificamente para resolver problemas de previsão, não apresentando um componente de pré-processamento que lide com dados temporais, como em \citep{OlsonEvaluationScience,Thornton2012Auto-WEKA:Algorithms}. Em \cite{Nikitin2022AutomatedPipelines} e \cite{Shah2021AutoAI-TS:Forecasting} os autores desenvolveram soluções com foco em problemas de previsão que incluem pré-processamento para séries temporais com o mínimo de entradas pelo usuário. 
@@ -30,8 +29,8 @@ Durante o mestrado pude trabalhar com técnicas diferentes de previsão de séri
 	
 </p></details>
 
-	
 <details><summary>Principais contribuições a serem geradas:</summary><p>
+	
 Espera-se que esta pesquisa apresente contribuições para os campos de pesquisa de Previsão de séries temporais e AutoML, tendo como contribuição mais relevante o desenvolvimento de novas metodologias de AutoML, incluindo a otimização de hiperparâmetros, procedimentos de pré-processamento automáticos, procedimentos de decomposição de séries e otimização de modelos de previsão de séries temporais.
 	
 Essas novas metodologias serão implementadas em um framework AutoML de código aberto específico para previsão de séries temporais. A ferramenta deve ser acessível para usuários com pouco domínio na área e deve permitir a entrada de séries univariadas e multivariadas, além de dar suporte a diferentes tipos de previsões com alta precisão e baixo custo computacional.

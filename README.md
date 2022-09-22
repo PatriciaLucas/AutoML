@@ -1,4 +1,4 @@
-# AUTOML PARA PREVISÃO DE SÉRIES TEMPORAIS
+# :hearts: AUTOML PARA PREVISÃO DE SÉRIES TEMPORAIS
 
 
 Projeto de Tese desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/) ([PPGEE - UFMG](https://www.ppgee.ufmg.br/))

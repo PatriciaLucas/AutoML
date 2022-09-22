@@ -39,11 +39,11 @@ Essas novas metodologias serão implementadas em um framework AutoML de código 
 
 ## Mapa da pesquisa
 
-### AutoML
+### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md)
 - Componentes
-	- Seleção de modelos
-	- Otimização de hiperparâmetros
-	- Engenharia de recursos
+	- [Seleção de modelos](https://github.com/PatriciaLucas/AutoML/blob/main/selecao_modelos.md)
+	- [Otimização de hiperparâmetros](https://github.com/PatriciaLucas/AutoML/blob/main/otimizacao_hiperparametros)
+	- [Engenharia de recursos](https://github.com/PatriciaLucas/AutoML/blob/main/selecao_modelos.md)
 - Séries Temporais
 	- Datasets
 	- Frameworks

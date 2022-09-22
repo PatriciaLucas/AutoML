@@ -12,8 +12,8 @@ Projeto de Tese desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/)
 *Data de início: 10/02/2022*
 
 
-**Motivação:**
-[[MORE]]
+
+<details><summary>**Motivação:**</summary><p>
 
 	
 **Principais contribuições a serem geradas**

@@ -38,7 +38,8 @@ Essas novas metodologias serão implementadas em um framework AutoML de código 
 	
 </p></details>
 
-**Mapa da pesquisa:** :rocket:
+## Mapa da pesquisa
+
 ### AutoML
 - Componentes
 	- Seleção de modelos

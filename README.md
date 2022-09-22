@@ -1,4 +1,4 @@
-# :hearts: AUTOML PARA PREVISÃO DE SÉRIES TEMPORAIS
+# AUTOML PARA PREVISÃO DE SÉRIES TEMPORAIS
 
 
 Projeto de Tese desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/) ([PPGEE - UFMG](https://www.ppgee.ufmg.br/))
@@ -37,9 +37,9 @@ Essas novas metodologias serão implementadas em um framework AutoML de código 
 	
 </p></details>
 
-## Mapa da pesquisa
+## Mapa da pesquisa 
 
-### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md)
+### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md) :rocket:
 - Componentes
 	- [Seleção de modelos](https://github.com/PatriciaLucas/AutoML/blob/main/selecao_modelos.md)
 	- [Otimização de hiperparâmetros](https://github.com/PatriciaLucas/AutoML/blob/main/otimizacao_hiperparametros)

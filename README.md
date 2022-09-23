@@ -1,7 +1,17 @@
 # AUTOML PARA PREVISÃO DE SÉRIES TEMPORAIS
 
+<center>
+<table><tr>
+<td><a href="https://www.ufmg.br/"><img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/principal_completa3_ufmg.jpg" alt="UFMG - Universidade Federal de Minas Gerais" width="100"/></a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td> <a href="http://www.minds.eng.ufmg.br/"><img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/images.jpg" alt="MINDS - Machine Intelligence and Data Science Lab" width="70"/></a></td> 
+  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><a href="http://www.ifnmg.edu.br"><img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/salinas_horizontal_jpg.jpg" alt="IFNMG - Instituto Federal do Norte de Minas Gerais" width="100"/></a></td>
+</tr>
+</table>
+</center>
 
-Projeto de Tese desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/) ([PPGEE - UFMG](https://www.ppgee.ufmg.br/))
+#### Projeto de tese de doutorado desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/) ([PPGEE - UFMG](https://www.ppgee.ufmg.br/)).
 
 *Autora: Patrícia de Oliveira e Lucas* <a itemprop="sameAs" content="https://orcid.org/0000-0002-7334-8863" href="https://orcid.org/0000-0002-7334-8863" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
 
@@ -41,10 +51,10 @@ Essas novas metodologias serão implementadas em um framework AutoML de código 
 
 ### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md) :triangular_flag_on_post:
 - Componentes
-	- [Seleção de modelos](https://github.com/PatriciaLucas/AutoML/blob/main/selecao_modelos.md)
-	- [Otimização de hiperparâmetros](https://github.com/PatriciaLucas/AutoML/blob/main/otimizacao_hiperparametros)
-	- [Engenharia de recursos](https://github.com/PatriciaLucas/AutoML/blob/main/selecao_modelos.md)
+	- [Seleção de modelos](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/engenharia_recursos.md)
+	- [Otimização de hiperparâmetros](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/otimizacao_hiperparametros.md)
+	- [Engenharia de recursos](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/selecao_modelos.md)
 - Séries Temporais
-	- Datasets
-	- Frameworks
-	- PyFTS
+	- [Datasets](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/datasets)
+	- [Frameworks](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/frameworks)
+	- [PyFTS](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/pyfts)

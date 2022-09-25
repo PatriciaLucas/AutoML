@@ -54,6 +54,7 @@ Essas novas metodologias serão implementadas em um framework AutoML de código 
 	- [Seleção de modelos](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/engenharia_recursos.md)
 	- [Otimização de hiperparâmetros](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/otimizacao_hiperparametros.md)
 	- [Engenharia de recursos](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/selecao_modelos.md)
+- [Frameworks](https://github.com/PatriciaLucas/AutoML/tree/main/frameworks)
 - Séries Temporais
 	- [Datasets](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/datasets)
 	- [Frameworks](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/frameworks)

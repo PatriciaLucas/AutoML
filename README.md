@@ -1,16 +1,5 @@
 # AUTOML PARA PREVISÃO DE SÉRIES TEMPORAIS
 
-<center>
-<table><tr>
-<td><a href="https://www.ufmg.br/"><img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/principal_completa3_ufmg.jpg" alt="UFMG - Universidade Federal de Minas Gerais" width="100"/></a></td>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td> <a href="http://www.minds.eng.ufmg.br/"><img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/images.jpg" alt="MINDS - Machine Intelligence and Data Science Lab" width="70"/></a></td> 
-  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td><a href="http://www.ifnmg.edu.br"><img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/salinas_horizontal_jpg.jpg" alt="IFNMG - Instituto Federal do Norte de Minas Gerais" width="100"/></a></td>
-</tr>
-</table>
-</center>
-
 #### Projeto de tese de doutorado desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/) ([PPGEE - UFMG](https://www.ppgee.ufmg.br/)).
 
 *Autora: Patrícia de Oliveira e Lucas* <a itemprop="sameAs" content="https://orcid.org/0000-0002-7334-8863" href="https://orcid.org/0000-0002-7334-8863" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>

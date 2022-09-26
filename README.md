@@ -1,6 +1,6 @@
 # AUTOML PARA PREVISÃO DE SÉRIES TEMPORAIS
 
-#### Projeto de tese de doutorado desenvolvida no [Laboratório MINDS](https://minds.eng.ufmg.br/) ([PPGEE - UFMG](https://www.ppgee.ufmg.br/)).
+#### Projeto de tese de doutorado desenvolvido no [Laboratório MINDS](https://minds.eng.ufmg.br/) ([PPGEE - UFMG](https://www.ppgee.ufmg.br/)).
 
 *Autora: Patrícia de Oliveira e Lucas* <a itemprop="sameAs" content="https://orcid.org/0000-0002-7334-8863" href="https://orcid.org/0000-0002-7334-8863" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
 
@@ -10,7 +10,7 @@
 
 *Data de início: 10/02/2022*
 
-
+<img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/principal_completa3_ufmg.jpg" width="150"/>   <img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/salinas_horizontal_jpg.jpg" width="150"/>   <img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/images.jpg" width="70"/>
 
 <details><summary>Motivação:</summary><p>
 	
@@ -28,15 +28,9 @@ Durante o mestrado pude trabalhar com técnicas diferentes de previsão de séri
 	
 </p></details>
 
-<details><summary>Principais contribuições:</summary><p>
-	
-Espera-se que esta pesquisa apresente contribuições para os campos de pesquisa de Previsão de séries temporais e AutoML, tendo como contribuição mais relevante o desenvolvimento de novas metodologias de AutoML, incluindo a otimização de hiperparâmetros, procedimentos de pré-processamento automáticos, procedimentos de decomposição de séries e otimização de modelos de previsão de séries temporais.
-	
-Essas novas metodologias serão implementadas em um framework AutoML de código aberto específico para previsão de séries temporais. A ferramenta deve ser acessível para usuários com pouco domínio na área e deve permitir a entrada de séries univariadas e multivariadas, além de dar suporte a diferentes tipos de previsões com alta precisão e baixo custo computacional.
-	
-</p></details>
+## Mapa da pesquisa
 
-## Mapa da pesquisa 
+<img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/mapa.png" width="600"/> 
 
 ### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md) :triangular_flag_on_post:
 - Componentes
@@ -49,3 +43,5 @@ Essas novas metodologias serão implementadas em um framework AutoML de código 
 	- [Datasets](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/datasets)
 	- [Frameworks](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/frameworks)
 	- [PyFTS](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/pyfts)
+
+

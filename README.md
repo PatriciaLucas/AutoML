@@ -2,6 +2,8 @@
 
 #### Projeto de tese de doutorado desenvolvido no [Laboratório MINDS](https://minds.eng.ufmg.br/) ([PPGEE - UFMG](https://www.ppgee.ufmg.br/)).
 
+<img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/principal_completa3_ufmg.jpg" width="150"/>   <img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/salinas_horizontal_jpg.jpg" width="150"/>   <img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/images.jpg" width="70"/>
+
 *Autora: Patrícia de Oliveira e Lucas* <a itemprop="sameAs" content="https://orcid.org/0000-0002-7334-8863" href="https://orcid.org/0000-0002-7334-8863" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
 
 *Orientador: Frederico Gadelha Guimarães* <a itemprop="sameAs" content="https://orcid.org/0000-0001-9238-8839" href="https://orcid.org/0000-0001-9238-8839" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
@@ -10,7 +12,7 @@
 
 *Data de início: 10/02/2022*
 
-<img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/principal_completa3_ufmg.jpg" width="150"/>   <img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/salinas_horizontal_jpg.jpg" width="150"/>   <img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/images.jpg" width="70"/>
+
 
 <details><summary>Motivação:</summary><p>
 	

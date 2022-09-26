@@ -34,7 +34,7 @@ Durante o mestrado pude trabalhar com técnicas diferentes de previsão de séri
 
 ### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md) :triangular_flag_on_post:
 - Componentes
- 	- [Preparação dos dados]()
+ 	- [Preparação dos dados](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/preparacao_dados.md)
  	- [Engenharia de recursos](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/selecao_modelos.md)
 	- [Seleção de modelos](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/engenharia_recursos.md)
 	- [Otimização de hiperparâmetros](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/otimizacao_hiperparametros.md)

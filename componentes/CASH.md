@@ -1,4 +1,4 @@
-## Otimização de hiperparâmetros
+## Seleção de modelos e Otimização de hiperparâmetros
 
 **Trabalhos revisados:**
 

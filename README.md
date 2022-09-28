@@ -32,7 +32,7 @@ Durante o mestrado pude trabalhar com técnicas diferentes de previsão de séri
 
 ## Mapa da pesquisa
 
-<img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/mapa1.png" width="600"/> 
+<img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/mapa2.png" width="600"/> 
 
 ### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md) :triangular_flag_on_post:
 - Componentes

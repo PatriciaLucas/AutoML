@@ -17,3 +17,4 @@
 |Hyperopt: A Python Library for Optimizing the Hyperparameters of Machine Learning Algorithms|Hyperopt_2013|2013|[aqui](https://pdfs.semanticscholar.org/d4f4/9717c9adb46137f49606ebbdf17e3598b5a5.pdf)|[aqui](https://github.com/hyperopt/hyperopt)||
 |Simple And Efficient Architecture Search for Convolutional Neural Networks|Elsken_2017|2017|[aqui](https://arxiv.org/abs/1711.04528)|||
 |Neural Architecture Search with Reinforcement Learning|Zoph_2016|2016|[aqui](https://arxiv.org/abs/1611.01578)|||
+|Gradient-based hyperparameter optimization through reversible learning|Maclaurin_2015|2015|[aqui](https://dl.acm.org/doi/10.5555/3045118.3045343)|||

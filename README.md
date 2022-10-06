@@ -41,9 +41,9 @@ Durante o mestrado pude trabalhar com técnicas diferentes de previsão de séri
 	- [CASH](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/CASH.md)
 	- [Avaliação de modelos](https://github.com/PatriciaLucas/AutoML/blob/main/componentes/avaliacao_modelos.md)
 - [Frameworks](https://github.com/PatriciaLucas/AutoML/tree/main/frameworks)
-- Séries Temporais
+- [Séries Temporais](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/series_temporais.md)
 	- [Datasets](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/datasets)
 	- [Frameworks](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/frameworks)
-	- [PyFTS](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/pyfts)
+		- [PyFTS](https://github.com/PYFTS)
 
 

@@ -15,3 +15,5 @@
 |RoBO: A Flexible and Robust Bayesian Optimization Framework in Python|RoBO_2017|2017|[aqui](https://tr.informatik.uni-freiburg.de/reports/report292/report00292.pdf)|[aqui](https://github.com/automl/RoBO)||
 |Bayesian tuning and bandits : an extensible, open source library for AutoML|BTB_2018|2018|[aqui](https://dspace.mit.edu/handle/1721.1/119764)|[aqui](https://pypi.org/project/baytune/0.3.4/)||
 |Hyperopt: A Python Library for Optimizing the Hyperparameters of Machine Learning Algorithms|Hyperopt_2013|2013|[aqui](https://pdfs.semanticscholar.org/d4f4/9717c9adb46137f49606ebbdf17e3598b5a5.pdf)|[aqui](https://github.com/hyperopt/hyperopt)||
+|Simple And Efficient Architecture Search for Convolutional Neural Networks|Elsken_2017|2017|[aqui](https://arxiv.org/abs/1711.04528)|||
+|Neural Architecture Search with Reinforcement Learning|Zoph_2016|2016|[aqui](https://arxiv.org/abs/1611.01578)|||

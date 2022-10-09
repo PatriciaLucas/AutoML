@@ -5,6 +5,7 @@
 
 | Título | Chave bibtex | Ano | Link | Github | Página do resumo |
 |:------:|:-------:|:---:|:----:|:----------------:|:----------------:|
+|Algorithms for hyper-parameter optimization|Bergstra_2011|2011|[aqui](https://dl.acm.org/doi/10.5555/2986459.2986743)|-||
 |Fast Bayesian Optimization of Machine Learning Hyperparameters on Large Datasets|FABOLAS_2017|2017|[aqui](https://arxiv.org/abs/1605.07079)|[aqui](https://github.com/automl/RoBO)||
 |BOHB: Robust and Efficient Hyperparameter Optimization at Scale|BOHB_2018|2018|[aqui](https://arxiv.org/abs/1807.01774)|[aqui](https://automl.github.io/HpBandSter/build/html/optimizers/bohb.html)||
 |Non-stochastic Best Arm Identification and Hyperparameter Optimization|Jamieson_2015|2015|[aqui](https://arxiv.org/abs/1502.07943)|||
@@ -18,3 +19,6 @@
 |Simple And Efficient Architecture Search for Convolutional Neural Networks|Elsken_2017|2017|[aqui](https://arxiv.org/abs/1711.04528)|||
 |Neural Architecture Search with Reinforcement Learning|Zoph_2016|2016|[aqui](https://arxiv.org/abs/1611.01578)|||
 |Gradient-based hyperparameter optimization through reversible learning|Maclaurin_2015|2015|[aqui](https://dl.acm.org/doi/10.5555/3045118.3045343)|||
+|Automating Predictive Modeling Process using Reinforcement Learning|Khurana_2019|2019|[aqui](http://arxiv.org/abs/1903.00743)|||
+|Autostacker: A Compositional Evolutionary Learning System|Autostacker_2018|2018|[aqui](https://arxiv.org/abs/1803.00684)|||
+|DarwinML: A Graph-based Evolutionary Algorithm for Automated Machine Learning|DarwinML_2019|2019|[aqui](https://arxiv.org/abs/1901.08013)|||

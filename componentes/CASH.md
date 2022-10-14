@@ -5,6 +5,7 @@
 
 | Título | Chave bibtex | Ano | Link | Github | Página do resumo |
 |:------:|:-------:|:---:|:----:|:----------------:|:----------------:|
+|Hyperparameter Optimization|Feurer_2019|2019|[aqui](https://link.springer.com/chapter/10.1007/978-3-030-05318-5_1)|-|C1/26|
 |Algorithms for hyper-parameter optimization|Bergstra_2011|2011|[aqui](https://dl.acm.org/doi/10.5555/2986459.2986743)|-||
 |Fast Bayesian Optimization of Machine Learning Hyperparameters on Large Datasets|FABOLAS_2017|2017|[aqui](https://arxiv.org/abs/1605.07079)|[aqui](https://github.com/automl/RoBO)||
 |BOHB: Robust and Efficient Hyperparameter Optimization at Scale|BOHB_2018|2018|[aqui](https://arxiv.org/abs/1807.01774)|[aqui](https://automl.github.io/HpBandSter/build/html/optimizers/bohb.html)||

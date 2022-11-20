@@ -11,6 +11,7 @@
 |Automated Machine Learning in Practice: State of the Art and Recent Results|Tuggener_2019|2019|[aqui](http://arxiv.org/abs/1907.08392)|C1/20|
 |Techniques for Automated Machine Learning|Chen_2019|2019|[aqui](https://arxiv.org/abs/1907.08908)|C1/23|
 |Analysis of the AutoML Challenge Series 2015–2018|Guyon_2019|2019|[aqui](https://link.springer.com/chapter/10.1007/978-3-030-05318-5_10)|C1/25|
+|Automated Machine Learning: The New Wave of Machine Learning|Chauhan_2020|2020|[aqui](https://ieeexplore.ieee.org/document/9074859)|C1/37|
 
 
 

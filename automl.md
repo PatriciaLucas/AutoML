@@ -12,6 +12,7 @@
 |Techniques for Automated Machine Learning|Chen_2019|2019|[aqui](https://arxiv.org/abs/1907.08908)|C1/23|
 |Analysis of the AutoML Challenge Series 2015–2018|Guyon_2019|2019|[aqui](https://link.springer.com/chapter/10.1007/978-3-030-05318-5_10)|C1/25|
 |Automated Machine Learning: The New Wave of Machine Learning|Chauhan_2020|2020|[aqui](https://ieeexplore.ieee.org/document/9074859)|C1/37|
+|Towards big industrial data mining through explainable automated machine learning|Garouani_2022|2022|[aqui](https://link.springer.com/article/10.1007/s00170-022-08761-9)|C1/39|
 
 
 

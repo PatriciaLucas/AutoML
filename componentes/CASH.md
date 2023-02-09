@@ -24,3 +24,4 @@
 |Automating Predictive Modeling Process using Reinforcement Learning|Khurana_2019|2019|[aqui](http://arxiv.org/abs/1903.00743)|||
 |Autostacker: A Compositional Evolutionary Learning System|Autostacker_2018|2018|[aqui](https://arxiv.org/abs/1803.00684)|||
 |DarwinML: A Graph-based Evolutionary Algorithm for Automated Machine Learning|DarwinML_2019|2019|[aqui](https://arxiv.org/abs/1901.08013)|||
+|Benchmarking of hyperparameter optimization techniques for machine learning applications in production|Motz_2022|2022|[aqui](https://www.sciencedirect.com/science/article/pii/S2666912922000265)|||

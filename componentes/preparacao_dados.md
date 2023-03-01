@@ -10,3 +10,4 @@
 |BoostClean: Automated Error Detection and Repair for Machine Learning|BoostClean_2017|2017|[aqui](https://arxiv.org/abs/1711.01299)|||
 |Automated Image Data Preprocessing with Deep Reinforcement Learning|Minh_2018|2018|[aqui](https://arxiv.org/abs/1806.05886)||C1/54|
 |Auto-Prep: Efficient and Automated Data Preprocessing Pipeline|Bilal_2022|2022|[aqui](https://ieeexplore.ieee.org/abstract/document/9856663)||C1/54|
+|HoloClean: Holistic Data Repairs with Probabilistic Inference|HoloClean_2017|2017|[aqui](https://arxiv.org/abs/1702.00820)||C1/59|

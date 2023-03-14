@@ -13,3 +13,8 @@
 |ATM: A distributed, collaborative, scalable system for automated machine learning|ATM_2017|2017|[aqui](https://ieeexplore.ieee.org/document/8257923)|||
 |H2O AutoML: Scalable Automatic Machine Learning|H2O_2020|2020|[aqui](https://www.automl.org/wp-content/uploads/2020/07/AutoML_2020_paper_61.pdf)|[aqui](https://github.com//h2oai/h2o-3/blob/master/h2o-docs/src/product/automl.rst)||
 |Automated evolutionary approach for the design of composite machine learning pipelines|FEDOT_2022|2022|[aqui](https://arxiv.org/pdf/2106.15397.pdf)|[aqui](https://github.com/aimclub/FEDOT)||
+|AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data|AutoGluon_2020|2020|[aqui](https://arxiv.org/abs/2003.06505)|[aqui](https://github.com/autogluon/autogluon)||
+|GAMA: a General Automated Machine learning Assistant|GAMA_2020|2020|[aqui](http://arxiv.org/abs/2007.04911)|[aqui](https://github.com/openml-labs/gama)||
+|Auto-WEKA 2.0: Automatic model selection and hyperparameter optimization in WEKA|Auto-WEKA_2017|2017|[aqui](https://www.cs.ubc.ca/labs/algorithms/Projects/autoweka/papers/16-599.pdf)|[aqui](https://github.com/automl/autoweka)||
+|ML-Plan: Automated machine learning via hierarchical planning|ML-Plan_2018|2018|[aqui](https://link.springer.com/article/10.1007/s10994-018-5735-z)|[aqui](https://github.com/fmohr/ML-Plan)||
+|RECIPE: A Grammar-Based Framework for Automatically Evolving Classification Pipelines|RECIPE_2017|2017|[aqui](https://link.springer.com/chapter/10.1007/978-3-319-55696-3_16)|[aqui](https://github.com/laic-ufmg/Recipe)||

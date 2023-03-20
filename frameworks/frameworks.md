@@ -18,3 +18,5 @@
 |Auto-WEKA 2.0: Automatic model selection and hyperparameter optimization in WEKA|Auto-WEKA_2017|2017|[aqui](https://www.cs.ubc.ca/labs/algorithms/Projects/autoweka/papers/16-599.pdf)|[aqui](https://github.com/automl/autoweka)||
 |ML-Plan: Automated machine learning via hierarchical planning|ML-Plan_2018|2018|[aqui](https://link.springer.com/article/10.1007/s10994-018-5735-z)|[aqui](https://github.com/fmohr/ML-Plan)||
 |RECIPE: A Grammar-Based Framework for Automatically Evolving Classification Pipelines|RECIPE_2017|2017|[aqui](https://link.springer.com/chapter/10.1007/978-3-319-55696-3_16)|[aqui](https://github.com/laic-ufmg/Recipe)||
+|Auto-Pytorch: Multi-Fidelity MetaLearning for
+Efficient and Robust AutoDL|AutoPytorch_2021|2021|[aqui](https://arxiv.org/pdf/2006.13799.pdf)|[aqui](https://github.com/automl/Auto-PyTorch)||

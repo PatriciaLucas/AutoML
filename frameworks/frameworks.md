@@ -20,3 +20,4 @@
 |RECIPE: A Grammar-Based Framework for Automatically Evolving Classification Pipelines|RECIPE_2017|2017|[aqui](https://link.springer.com/chapter/10.1007/978-3-319-55696-3_16)|[aqui](https://github.com/laic-ufmg/Recipe)||
 |Auto-Pytorch: Multi-Fidelity MetaLearning for
 Efficient and Robust AutoDL|AutoPytorch_2021|2021|[aqui](https://arxiv.org/pdf/2006.13799.pdf)|[aqui](https://github.com/automl/Auto-PyTorch)||
+|FLAML: A FAST AND LIGHTWEIGHT AUTOML LIBRARY|FLAMLh_2021|2021|[aqui](https://www.microsoft.com/en-us/research/uploads/prod/2021/03/MLSys21FLAML.pdf)|[aqui](https://microsoft.github.io/FLAML/)||

@@ -8,8 +8,8 @@
 |Hyperparameter Optimization|Feurer_2019b|2019|[aqui](https://link.springer.com/chapter/10.1007/978-3-030-05318-5_1)|-|C1/26|
 |Algorithms for hyper-parameter optimization|Bergstra_2011|2011|[aqui](https://dl.acm.org/doi/10.5555/2986459.2986743)|-||
 |Meta-Learning|Vanschoren_2019|2019|[aqui](https://link.springer.com/chapter/10.1007/978-3-030-05318-5_2)|-|C1/32|
-|Fast Bayesian Optimization of Machine Learning Hyperparameters on Large Datasets|FABOLAS_2017|2017|[aqui](https://arxiv.org/abs/1605.07079)|[aqui](https://github.com/automl/RoBO)||
-|BOHB: Robust and Efficient Hyperparameter Optimization at Scale|BOHB_2018|2018|[aqui](https://arxiv.org/abs/1807.01774)|[aqui](https://automl.github.io/HpBandSter/build/html/optimizers/bohb.html)||
+|Fast Bayesian Optimization of Machine Learning Hyperparameters on Large Datasets|FABOLAS_2017|2017|[aqui](https://arxiv.org/abs/1605.07079)|[aqui](https://github.com/automl/RoBO)|C1/73|
+|BOHB: Robust and Efficient Hyperparameter Optimization at Scale|BOHB_2018|2018|[aqui](https://arxiv.org/abs/1807.01774)|[aqui](https://automl.github.io/HpBandSter/build/html/optimizers/bohb.html)|C1/73|
 |Non-stochastic Best Arm Identification and Hyperparameter Optimization|Jamieson_2015|2015|[aqui](https://arxiv.org/abs/1502.07943)|||
 |Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization|Hyperband_2016|2016|[aqui](https://arxiv.org/abs/1603.06560)|||
 |Easy Hyperparameter Search Using Optunity|Claesen_2014|2014|[aqui](https://arxiv.org/abs/1412.1114)|||

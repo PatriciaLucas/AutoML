@@ -22,8 +22,8 @@
 |Neural Architecture Search with Reinforcement Learning|Zoph_2016|2016|[aqui](https://arxiv.org/abs/1611.01578)|||
 |Gradient-based hyperparameter optimization through reversible learning|Maclaurin_2015|2015|[aqui](https://dl.acm.org/doi/10.5555/3045118.3045343)|||
 |Automating Predictive Modeling Process using Reinforcement Learning|Khurana_2019|2019|[aqui](http://arxiv.org/abs/1903.00743)|||
-|Autostacker: A Compositional Evolutionary Learning System|Autostacker_2018|2018|[aqui](https://arxiv.org/abs/1803.00684)|||
-|DarwinML: A Graph-based Evolutionary Algorithm for Automated Machine Learning|DarwinML_2019|2019|[aqui](https://arxiv.org/abs/1901.08013)|||
+|Autostacker: A Compositional Evolutionary Learning System|Autostacker_2018|2018|[aqui](https://arxiv.org/abs/1803.00684)||C1/76|
+|DarwinML: A Graph-based Evolutionary Algorithm for Automated Machine Learning|DarwinML_2019|2019|[aqui](https://arxiv.org/abs/1901.08013)||C1/75|
 |Benchmarking of hyperparameter optimization techniques for machine learning applications in production|Motz_2022|2022|[aqui](https://www.sciencedirect.com/science/article/pii/S2666912922000265)||C1/43|
 |A tutorial on automatic hyperparameter tuning of deep spectral modelling for regression and classification tasks|Passos_2022|2022|[aqui](https://www.sciencedirect.com/science/article/pii/S0169743922000314)||C1/43|
 |Auto-CASH: A meta-learning embedding approach for autonomous classification algorithm selection|Auto-CASH_2022|2022|[aqui](https://www.sciencedirect.com/science/article/pii/S0020025522000639)||C1/72|

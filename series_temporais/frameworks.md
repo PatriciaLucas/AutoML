@@ -14,3 +14,4 @@
 |AutoAI-TS: AutoAI for Time Series Forecasting|AutoAI-TS_2021|2021|[aqui](https://arxiv.org/abs/2102.12347)|||
 |Deep feature synthesis: Towards automating data science endeavors|Kanter_2015|2015|[aqui](https://ieeexplore.ieee.org/document/7344858)|||
 |GAMA: a General Automated Machine learning Assistant|GAMA_2020|2020|[aqui](https://arxiv.org/abs/2007.04911)|[aqui](https://github.com/openml-labs/gama)||
+|Automated evolutionary approach for the design of composite machine learning pipelines|FEDOT_2022|2022|[aqui](https://arxiv.org/abs/2106.15397)|[aqui](https://github.com/aimclub/FEDOT)||

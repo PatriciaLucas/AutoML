@@ -15,3 +15,7 @@
 |Deep feature synthesis: Towards automating data science endeavors|Kanter_2015|2015|[aqui](https://ieeexplore.ieee.org/document/7344858)|||
 |GAMA: a General Automated Machine learning Assistant|GAMA_2020|2020|[aqui](https://arxiv.org/abs/2007.04911)|[aqui](https://github.com/openml-labs/gama)||
 |Automated evolutionary approach for the design of composite machine learning pipelines|FEDOT_2022|2022|[aqui](https://arxiv.org/abs/2106.15397)|[aqui](https://github.com/aimclub/FEDOT)||
+|Efficient Automated Deep Learning for Time Series Forecasting|Desng_2023|2023|[aqui](https://link.springer.com/chapter/10.1007/978-3-031-26409-2_40)|||
+|Robustness of AutoML for Time Series Forecasting in Sensor Networks|Halvari_2021|2021|[aqui](https://ieeexplore.ieee.org/abstract/document/9472199)|||
+|Automatic Time Series Forecasting: The forecast Package for R|Hyndman_2008|2008|[aqui](https://rjournal.github.io/archive/2021/RJ-2021-101/RJ-2021-101.pdf)|||
+|Automatic Time Series Forecasting with GRNN: A Comparison with Other Models|Martinez_2019|2019|[aqui](https://link.springer.com/chapter/10.1007/978-3-030-20521-8_17)|||

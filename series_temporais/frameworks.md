@@ -10,7 +10,7 @@
 |Auto-Keras: An Efficient Neural Architecture Search System|Auto-Keras_2018|2018|[aqui](https://arxiv.org/abs/1806.10282)|[aqui](https://github.com/keras-team/autokeras)||
 |AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data|AutoGluon_2020|2020|[aqui](https://arxiv.org/abs/2003.06505)|[aqui](https://github.com/awslabs/autogluon)||
 |H2O AutoML: Scalable Automatic Machine Learning|H2O_2020|2020|[aqui](https://www.automl.org/wp-content/uploads/2020/07/AutoML_2020_paper_61.pdf)|[aqui](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html)||
-|Evaluation of a Tree-based Pipeline Optimization Tool for Automating Data Science|Olson_2016|2016|[aqui](https://dl.acm.org/doi/10.1145/2908812.2908918)|[aqui](https://epistasislab.github.io/tpot/)||
+|Evaluation of a Tree-based Pipeline Optimization Tool for Automating Data Science|TPOT_2016|2016|[aqui](https://dl.acm.org/doi/10.1145/2908812.2908918)|[aqui](https://epistasislab.github.io/tpot/)||
 |AutoAI-TS: AutoAI for Time Series Forecasting|AutoAI-TS_2021|2021|[aqui](https://arxiv.org/abs/2102.12347)|||
 |Deep feature synthesis: Towards automating data science endeavors|Kanter_2015|2015|[aqui](https://ieeexplore.ieee.org/document/7344858)|||
 |GAMA: a General Automated Machine learning Assistant|GAMA_2020|2020|[aqui](https://arxiv.org/abs/2007.04911)|[aqui](https://github.com/openml-labs/gama)||

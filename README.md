@@ -32,7 +32,7 @@ Durante o mestrado pude trabalhar com técnicas diferentes de previsão de séri
 
 ## Mapa da pesquisa
 
-<img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/map1.png" width="800"/> 
+<img src="https://github.com/PatriciaLucas/AutoML/blob/main/Figuras/diagram-20230421.png?raw=true" width="800"/> 
 
 ### [AutoML](https://github.com/PatriciaLucas/AutoML/blob/main/automl.md) :triangular_flag_on_post:
 - Componentes
@@ -44,6 +44,6 @@ Durante o mestrado pude trabalhar com técnicas diferentes de previsão de séri
 - [Séries Temporais](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/series_temporais.md)
 	- [Datasets](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/datasets)
 	- [Frameworks](https://github.com/PatriciaLucas/AutoML/blob/main/series_temporais/frameworks)
-		- [PyFTS](https://github.com/PYFTS)
+		
 
 

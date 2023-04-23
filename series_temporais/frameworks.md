@@ -33,5 +33,5 @@
 |sktime: A Unified Interface for Machine Learning with Time Series|sktime_2019|2019|[aqui](https://arxiv.org/abs/1909.07872)|||
 |Forecasting at Scale|Prophet_2018|2018|[aqui](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080)|||
 |DeepAR: Probabilistic forecasting with autoregressive recurrent networks|DeepAR_2020|2020|[aqui](https://www.sciencedirect.com/science/article/pii/S0169207019301888)|||
-|N-BEATS: Neural basis expansion analysis for interpretable time series forecasting|N-BEATS_2019|2019|[aqui](https://arxiv.org/abs/1905.10437)|||
+|N-BEATS: Neural basis expansion analysis for interpretable time series forecasting|N-BEATS_2019|2019|[aqui](https://arxiv.org/abs/1905.10437)||C2/04|
 |Auto_TimeSeries||2022||[aqui](https://github.com/AutoViML/Auto_TS)||

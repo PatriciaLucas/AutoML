@@ -14,7 +14,7 @@
 |AutoAI-TS: AutoAI for Time Series Forecasting|AutoAI-TS_2021|2021|[aqui](https://arxiv.org/abs/2102.12347)|[aqui]([https://arxiv.org/abs/2102.12347](https://pypi.org/project/autoai-ts-libs/))|C2/03|
 |Deep feature synthesis: Towards automating data science endeavors|Kanter_2015|2015|[aqui](https://ieeexplore.ieee.org/document/7344858)|||
 |GAMA: a General Automated Machine learning Assistant|GAMA_2020|2020|[aqui](https://arxiv.org/abs/2007.04911)|[aqui](https://github.com/openml-labs/gama)||
-|Automated evolutionary approach for the design of composite machine learning pipelines|FEDOT_2022|2022|[aqui](https://arxiv.org/abs/2106.15397)|[aqui](https://github.com/aimclub/FEDOT)||
+|Automated evolutionary approach for the design of composite machine learning pipelines|FEDOT_2022|2022|[aqui](https://arxiv.org/abs/2106.15397)|[aqui](https://github.com/aimclub/FEDOT)|C2/05|
 |Efficient Automated Deep Learning for Time Series Forecasting|Desng_2023|2023|[aqui](https://link.springer.com/chapter/10.1007/978-3-031-26409-2_40)|||
 |Robustness of AutoML for Time Series Forecasting in Sensor Networks|Halvari_2021|2021|[aqui](https://ieeexplore.ieee.org/abstract/document/9472199)|||
 |Automatic Time Series Forecasting: The forecast Package for R|Hyndman_2008|2008|[aqui](https://rjournal.github.io/archive/2021/RJ-2021-101/RJ-2021-101.pdf)|||
@@ -31,7 +31,7 @@
 |VEST: automatic feature engineering for forecasting|Vest_2021|2021|[aqui](https://link.springer.com/article/10.1007/s10994-021-05959-y)|||
 |Automated deep learning for trend prediction in time series data|Kou_2021|2021|[aqui](https://ieeexplore.ieee.org/abstract/document/9626910)|||
 |sktime: A Unified Interface for Machine Learning with Time Series|sktime_2019|2019|[aqui](https://arxiv.org/abs/1909.07872)|||
-|Forecasting at Scale|Prophet_2018|2018|[aqui](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080)|||
+|Forecasting at Scale|Prophet_2018|2018|[aqui](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080)||C2/05|
 |DeepAR: Probabilistic forecasting with autoregressive recurrent networks|DeepAR_2020|2020|[aqui](https://www.sciencedirect.com/science/article/pii/S0169207019301888)|||
 |N-BEATS: Neural basis expansion analysis for interpretable time series forecasting|N-BEATS_2019|2019|[aqui](https://arxiv.org/abs/1905.10437)||C2/04|
-|AutoTS: Automatic Time Series Forecasting Model Design Based on Two-Stage Pruning|AutoTS_2022|2022|[aqui](https://arxiv.org/pdf/2203.14169.pdf)|[aqui](https://github.com/AutoViML/Auto_TS)||
+|AutoTS: Automatic Time Series Forecasting Model Design Based on Two-Stage Pruning|AutoTS_2022|2022|[aqui](https://arxiv.org/pdf/2203.14169.pdf)|[aqui](https://github.com/AutoViML/Auto_TS)|C2/06|

@@ -18,7 +18,6 @@
 |Efficient Automated Deep Learning for Time Series Forecasting|Desng_2023|2023|[aqui](https://link.springer.com/chapter/10.1007/978-3-031-26409-2_40)|||
 |Robustness of AutoML for Time Series Forecasting in Sensor Networks|Halvari_2021|2021|[aqui](https://ieeexplore.ieee.org/abstract/document/9472199)|||
 |Automatic Time Series Forecasting: The forecast Package for R|Hyndman_2008|2008|[aqui](https://rjournal.github.io/archive/2021/RJ-2021-101/RJ-2021-101.pdf)|||
-|Automatic Time Series Forecasting with GRNN: A Comparison with Other Models|Martinez_2019|2019|[aqui](https://link.springer.com/chapter/10.1007/978-3-030-20521-8_17)|||
 |BOAT: A Bayesian Optimization AutoML Time-series Framework for Industrial Applications|BOAT_2021|2021|[aqui](https://ieeexplore.ieee.org/abstract/document/9564105)|||
 |Towards Time-Series Feature Engineering in Automated Machine Learning for Multi-Step-Ahead Forecasting|Rojas_2022|2022|[aqui](https://www.mdpi.com/2673-4591/18/1/17)||C2/04|
 |AutoML with Parallel Genetic Algorithm for Fast Hyperparameters Optimization in Efficient IoT Time Series Prediction|Wu_2022|2022|[aqui](https://ieeexplore.ieee.org/abstract/document/9996560)||C2/07|

@@ -34,3 +34,7 @@
 |DeepAR: Probabilistic forecasting with autoregressive recurrent networks|DeepAR_2020|2020|[aqui](https://www.sciencedirect.com/science/article/pii/S0169207019301888)|||
 |N-BEATS: Neural basis expansion analysis for interpretable time series forecasting|N-BEATS_2019|2019|[aqui](https://arxiv.org/abs/1905.10437)||C2/04|
 |AutoTS: Automatic Time Series Forecasting Model Design Based on Two-Stage Pruning|AutoTS_2022|2022|[aqui](https://arxiv.org/pdf/2203.14169.pdf)|[aqui](https://github.com/AutoViML/Auto_TS)|C2/06|
+|Semi-automated simultaneous predictor selection for regression-SARIMA models|Low_2020|2020|[aqui](https://link.springer.com/article/10.1007/s11222-020-09970-6)|||
+|Dynamic selection of forecast combiners|Sergio_2016|2016|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0925231216309687?via%3Dihub)|||
+|Automated data-driven modeling of building energy systems via machine learning algorithms|Ratz_2019|2019|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0378778819316585)|||
+|Generalizing the Theta method for automatic forecasting|Spi_2020|2020|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0377221720300242)|||

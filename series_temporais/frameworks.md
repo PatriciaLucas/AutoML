@@ -21,7 +21,7 @@
 |BOAT: A Bayesian Optimization AutoML Time-series Framework for Industrial Applications|BOAT_2021|2021|[aqui](https://ieeexplore.ieee.org/abstract/document/9564105)|||
 |Towards Time-Series Feature Engineering in Automated Machine Learning for Multi-Step-Ahead Forecasting|Rojas_2022|2022|[aqui](https://www.mdpi.com/2673-4591/18/1/17)||C2/04|
 |AutoML with Parallel Genetic Algorithm for Fast Hyperparameters Optimization in Efficient IoT Time Series Prediction|Wu_2022|2022|[aqui](https://ieeexplore.ieee.org/abstract/document/9996560)||C2/07|
-|MOSPAT: AutoML based Model Selection and Parameter Tuning for Time Series Anomaly Detection|MOSPAT_2022|2022|[aqui](https://arxiv.org/abs/2205.11755)|||
+|MOSPAT: AutoML based Model Selection and Parameter Tuning for Time Series Anomaly Detection|MOSPAT_2022|2022|[aqui](https://arxiv.org/abs/2205.11755)||C2/09|
 |Time Series Data Modeling Using Advanced Machine Learning and AutoML|Sonia_2022|2022|[aqui](https://www.mdpi.com/2071-1050/14/22/15292)|||
 |Automated Machine Learning for Time Series Prediction|Silva_2022|2022|[aqui](https://ieeexplore.ieee.org/abstract/document/9870305)|||
 |Evolutionary Automated Machine Learning for Multi-Scale Decomposition and Forecasting of Sensor Time Series|Sarafanov_2022|2022|[aqui](https://ieeexplore.ieee.org/abstract/document/9870347)|||
@@ -34,7 +34,5 @@
 |DeepAR: Probabilistic forecasting with autoregressive recurrent networks|DeepAR_2020|2020|[aqui](https://www.sciencedirect.com/science/article/pii/S0169207019301888)|||
 |N-BEATS: Neural basis expansion analysis for interpretable time series forecasting|N-BEATS_2019|2019|[aqui](https://arxiv.org/abs/1905.10437)||C2/04|
 |AutoTS: Automatic Time Series Forecasting Model Design Based on Two-Stage Pruning|AutoTS_2022|2022|[aqui](https://arxiv.org/pdf/2203.14169.pdf)|[aqui](https://github.com/AutoViML/Auto_TS)|C2/06|
-|Semi-automated simultaneous predictor selection for regression-SARIMA models|Low_2020|2020|[aqui](https://link.springer.com/article/10.1007/s11222-020-09970-6)|||
-|Dynamic selection of forecast combiners|Sergio_2016|2016|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0925231216309687?via%3Dihub)|||
-|Automated data-driven modeling of building energy systems via machine learning algorithms|Ratz_2019|2019|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0378778819316585)|||
-|Generalizing the Theta method for automatic forecasting|Spi_2020|2020|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0377221720300242)|||
+|Dynamic selection of forecast combiners|Sergio_2016|2016|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0925231216309687?via%3Dihub)||C2/08|
+|Automated data-driven modeling of building energy systems via machine learning algorithms|Ratz_2019|2019|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0378778819316585)||C2/09|

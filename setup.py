@@ -1,4 +1,5 @@
 import setuptools
+from setuptools import find_packages
 
 setuptools.setup(
     name='CATS',
@@ -6,7 +7,7 @@ setuptools.setup(
           'matplotlib',
           'numpy',
           'pandas'],
-    packages=[],	
+    packages=find_packages(),
     version='1.0',
     description='AUTOML Causal para previsão de séries temporais',
     long_description='AUTOML Causal para previsão de séries temporais',

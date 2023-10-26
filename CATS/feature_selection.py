@@ -13,7 +13,7 @@ from tigramite.independence_tests.parcorr import ParCorr
 from stationarizer import simple_auto_stationarize
 from statsmodels.regression.linear_model import OLS
 from statsmodels.tools import add_constant
-import organization as org
+import CATS.organization as org
 from sklearn.model_selection import train_test_split
 import warnings
 warnings.filterwarnings("ignore")

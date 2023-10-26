@@ -52,14 +52,14 @@ def organize_block(dataset, G, max_lags):
 
 
 def get_datasets(dataset, G_list, max_lags, target):
-    data = dict.fromkeys({"X_train": None, "y_train": None})
-    data["X_train"], data["y_train"] = organize_dataset(dataset, G_list[target], max_lags, target)
+    data = dict.fromkeys({"X": None, "y": None})
+    data["X"], data["y"] = organize_dataset(dataset, G_list[target], max_lags, target)
     return data
 
 def get_datasets_all(dataset, G_list, max_lags):
     dict_datasets = dict.fromkeys(list(G_list.keys()),None)
     for variable in dict_datasets:
-        data = dict.fromkeys({"X_train": None, "y_train": None})
-        data["X_train"], data["y_train"] = organize_dataset(dataset, G_list[variable], max_lags, variable)
+        data = dict.fromkeys({"X": None, "y": None})
+        data["X"], data["y"] = organize_dataset(dataset, G_list[variable], max_lags, variable)
         dict_datasets[variable] = data
     return dict_datasets

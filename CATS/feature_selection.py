@@ -123,8 +123,8 @@ def optimize_max_lags(dataset,target):
     for max_lags in lags:
         G_list = causal_graph(dataset, [target], max_lags)
         dict_dataset = org.get_datasets(dataset, G_list, max_lags, target)
-        regr = OLS(np.array(dict_dataset['y_train'], dtype=float), 
-                   add_constant(np.array(dict_dataset['y_train']))).fit()
+        regr = OLS(np.array(dict_dataset['y'], dtype=float), 
+                   add_constant(np.array(dict_dataset['y']))).fit()
         if len(akaike) != 0:
             if regr.aic < akaike[-1]:
                 akaike.append(regr.aic)

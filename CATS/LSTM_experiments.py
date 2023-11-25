@@ -179,7 +179,7 @@ def fit_deep(model_name, dataset):
   return tuner
 
 
-def predict(dataset, model, step_ahead, max_lags, G_list):
+def predict(dataset, model, step_ahead, max_lags, G_list, target):
   df_results = pd.DataFrame(columns = list(range(0,step_ahead)))
 
   if step_ahead > 0:
@@ -190,11 +190,11 @@ def predict(dataset, model, step_ahead, max_lags, G_list):
           block = dataset.loc[row:row+max_lags-1]
 
           # 1ª previsão
-          X_input = organize_block(block, G_list[params['target']], max_lags)
+          X_input = organize_block(block, G_list[target], max_lags)
           X_input = np.reshape(X_input.values, (1,) + X_input.shape)
           X_input=np.asarray(X_input).astype(np.float)
           forecast = model.predict(X_input)[0]
-          df_results.loc[row, 0] = forecast[dataset.columns.get_loc(params['target'])]
+          df_results.loc[row, 0] = forecast[dataset.columns.get_loc(target)]
 
           if step_ahead > 1:
             for step in range(1,step_ahead):
@@ -203,16 +203,16 @@ def predict(dataset, model, step_ahead, max_lags, G_list):
                 block = block.drop([0])
                 block.index = range(0,block.shape[0])
 
-                X_input = organize_block(block, G_list[params['target']], max_lags)
+                X_input = organize_block(block, G_list[target], max_lags)
                 X_input = np.reshape(X_input.values, (1,) + X_input.shape)
                 X_input=np.asarray(X_input).astype(np.float)
                 forecast = model.predict(X_input)[0]
 
-                df_results.loc[row, step] = forecast[dataset.columns.get_loc(params['target'])]
+                df_results.loc[row, step] = forecast[dataset.columns.get_loc(target)]
 
   return df_results
 
-def execute_lstm(dataset, target, step_ahead, max_lags, database_path):
+def execute_lstm(name_dataset, dataset, target, step_ahead, max_lags, database_path):
 
     execute("CREATE TABLE IF NOT EXISTS results(name_dataset TEXT, time FLOAT, max_lags INT, HPO BLOB, yhats BLOB, test BLOB, nrmse FLOAT)", database_path)
 
@@ -241,7 +241,7 @@ def execute_lstm(dataset, target, step_ahead, max_lags, database_path):
     hiperparams = model.summary()
 
     test = dataset.loc[dataset.shape[0]-200:]
-    df_results = predict(test, model, step_ahead, max_lags, G_list)
+    df_results = predict(test, model, step_ahead, max_lags, G_list, target)
 
     #Teste
     runtime = round(time.time() - start_time, 2)
@@ -283,6 +283,6 @@ def run(num_experiments=10):
     for e in range(num_experiments):
 
       print("Experimento "+str(e))
-      execute_lstm(data, target[d], step_ahead, max_lags, database_path)
+      execute_lstm(datasets[d], data, target[d], step_ahead, max_lags, database_path)
 
   return

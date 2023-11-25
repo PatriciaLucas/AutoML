@@ -273,7 +273,7 @@ def run(num_experiments=10):
   target = ['AVG', 'ETo', 'use', 'PM2.5', 'glo_avg']
   step_ahead = 10
   max_lags = 10
-  database_path = '/content/drive/MyDrive/DISCIPLINAS/TESE/CATS/LSTM_results/bd_lstm.db'
+  database_path = 'bd_lstm.db'
 
   for d in range(len(datasets)):
     print("Base de dados "+datasets[d])

@@ -212,27 +212,23 @@ def predict(dataset, model, step_ahead, max_lags, G_list):
 
   return df_results
 
-def execute_lstm():
+def execute_lstm(dataset, target, step_ahead, max_lags, database_path):
 
     execute("CREATE TABLE IF NOT EXISTS results(name_dataset TEXT, time FLOAT, max_lags INT, HPO BLOB, yhats BLOB, test BLOB, nrmse FLOAT)", database_path)
 
     start_time = time.time()
 
-    #Seleção da janela de lags
-    max_lags = 10
-
-
     #Organização dos dados de acordo com os lags
-    G_list = create_graph(dataset, params['target'], max_lags)
+    G_list = create_graph(dataset, target, max_lags)
 
-    train = get_datasets(dataset.loc[:2000], G_list, max_lags, params['target'])
+    train = get_datasets(dataset.loc[:2000], G_list, max_lags, target)
 
     #Treinamento e HPO
     tuner = fit_deep('LSTM', train)
     best_hps = tuner.get_best_hyperparameters(num_trials = 1)[0]
     model = tuner.hypermodel.build(best_hps)
 
-    train = get_datasets(dataset.loc[:dataset.shape[0]-201], G_list, max_lags, params['target'])
+    train = get_datasets(dataset.loc[:dataset.shape[0]-201], G_list, max_lags, target)
 
     X_train = train['X'].values
     Y_train = train['y'].values
@@ -245,18 +241,18 @@ def execute_lstm():
     hiperparams = model.summary()
 
     test = dataset.loc[dataset.shape[0]-200:]
-    df_results = predict(test, model, 10, max_lags, G_list)
+    df_results = predict(test, model, step_ahead, max_lags, G_list)
 
     #Teste
     runtime = round(time.time() - start_time, 2)
 
     erro = []
 
-    if params['step_ahead'] == 1:
-        erro.append(nrmse(test[params['target']][max_lags:], df_results[0]))
+    if step_ahead == 1:
+        erro.append(nrmse(test[target][max_lags:], df_results[0]))
     else:
         for i in range(df_results.shape[1]):
-            erro.append(nrmse(test[params['target']][max_lags+i:],df_results[i][:df_results.shape[0]-i]))
+            erro.append(nrmse(test[target][max_lags+i:],df_results[i][:df_results.shape[0]-i]))
 
 
     #Salva no banco de dados
@@ -265,7 +261,7 @@ def execute_lstm():
                                                                       max_lags,
                                                                       np.array(hiperparams).tostring(),
                                                                       df_results.to_numpy().tostring(),
-                                                                      test[params['target']].to_numpy().tostring(),
+                                                                      test[target].to_numpy().tostring(),
                                                                       np.array(erro).tostring()),
                   database_path)
 

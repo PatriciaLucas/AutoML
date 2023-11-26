@@ -172,6 +172,7 @@ def fit_deep(model_name, dataset):
             y=Y_train,
             epochs=100,
             batch_size=100,
+            verbose=0,
             callbacks=[stop_early]
     )
 
@@ -236,7 +237,7 @@ def execute_lstm(name_dataset, dataset, target, step_ahead, max_lags, database_p
     X_train = np.reshape(X_train,(X_train.shape[0],1,X_train.shape[1]))
     X_train=np.asarray(X_train).astype(np.int)
     Y_train=np.asarray(Y_train).astype(np.int)
-    model.fit(X_train,Y_train, epochs = 100)
+    model.fit(X_train,Y_train, epochs = 100, verbose=1)
 
     hiperparams = model.summary()
 

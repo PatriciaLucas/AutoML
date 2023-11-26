@@ -57,8 +57,8 @@ def execute_cats(name_dataset, dataset, target, step_ahead, database_path):
 
 
 def run(num_experiments=10):
-  datasets = ['DOWJONES', 'ETO', 'HOME', 'PRSA', 'SONDA']
-  target = ['AVG', 'ETo', 'use', 'PM2.5', 'glo_avg']
+  datasets = ['HOME', 'SONDA', 'DOWJONES', 'ETO', 'PRSA']
+  target = ['use', 'glo_avg', 'AVG', 'ETo', 'PM2.5']
   step_ahead = 10
   database_path = 'bd_cats.db'
 

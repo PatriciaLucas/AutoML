@@ -17,12 +17,12 @@ import cats
 import measures as mea
 
 
-def execute_cats(name_dataset, dataset, params, database_path):
+def execute_cats(name_dataset, dataset, target, step_ahead, database_path):
     #Criação da tabela no banco de dados:
-    sd.execute("CREATE TABLE IF NOT EXISTS results(name_dataset TEXT, G BLOB, params BLOB, \
+    sd.execute("CREATE TABLE IF NOT EXISTS results(name_dataset TEXT, G BLOB, \
             time FLOAT, max_lags INT, HPO BLOB, yhats BLOB, test BLOB, nrmse FLOAT)", database_path)
     
-
+    montecarlo_loop = 5
     train = dataset.loc[:dataset.shape[0]-301]
     test = dataset.loc[dataset.shape[0]-300:]
     
@@ -30,29 +30,27 @@ def execute_cats(name_dataset, dataset, params, database_path):
     start_time = time.time()
     
     #Treinamento
-    G, dict_variables, dict_datasets_train, max_lags, hp_list = cats.fit(train, params['target'])
+    G, dict_variables, dict_datasets_train, max_lags, hp_list = cats.fit(train, target)
     
     #Teste
-    yhats = cats.predict(test,  params['step_ahead'], params['montecarlo_loop'], dict_variables, G,  max_lags, params['target'])
+    yhats = cats.predict(test,  step_ahead, montecarlo_loop, dict_variables, G,  max_lags, target)
 
     
     runtime = round(time.time() - start_time, 2)
     
     nrmse = []
 
-    if params['step_ahead'] == 1:
-        nrmse.append(mea.nrmse(test[params['target']][max_lags:], yhats))
+    if step_ahead == 1:
+        nrmse.append(mea.nrmse(test[target][max_lags:], yhats))
     else:
-        for e in range(params['step_ahead']):
-            nrmse.append(mea.nrmse(test[params['target']][max_lags+e:], yhats.loc[e,:yhats.shape[1]-(e+1)].to_frame()))
+        for e in range(step_ahead):
+            nrmse.append(mea.nrmse(test[target][max_lags+e:], yhats.loc[e,:yhats.shape[1]-(e+1)].to_frame()))
             
  
     #Salva no banco de dados
-    sd.execute_insert("INSERT INTO results VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", (name_dataset, np.array(hp_list).tostring(), \
-                  str(params), runtime, max_lags, np.array(hp_list).tostring(), yhats.to_numpy().tostring(), test[params['target']].to_numpy().tostring(), 
+    sd.execute_insert("INSERT INTO results VALUES(?, ?, ?, ?, ?, ?, ?, ?)", (name_dataset, np.array(hp_list).tostring(), \
+                  runtime, max_lags, np.array(hp_list).tostring(), yhats.to_numpy().tostring(), test[target].to_numpy().tostring(), 
                   np.array(nrmse).tostring()), database_path)
-    print("Save: ",name_dataset)
-    print(nrmse)
         
     return
 

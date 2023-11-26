@@ -353,7 +353,7 @@ def GeneticAlgorithm(dataset, series):
     best_list = [population[0]]
     
     for i in range(ngen):
-        print("GENERATION {}".format(i))
+        #print("GENERATION {}".format(i))
 
         # Selection
         new_population = []
@@ -379,14 +379,12 @@ def GeneticAlgorithm(dataset, series):
         population = sorted(population, key=itemgetter('scalar_fitness'))
 
         population = population[:npop]
-        
-        print(population[0])
 
         best_list.append(population[0])
         
         if best_list[-2]['scalar_fitness'] >= best_list[-1]['scalar_fitness']:
             no_improvement_count +=1
-            print("WITHOUT IMPROVEMENT {}".format(no_improvement_count))
+            #print("WITHOUT IMPROVEMENT {}".format(no_improvement_count))
             pcross += 0.05
         else:
             no_improvement_count = 0

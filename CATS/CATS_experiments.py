@@ -5,9 +5,6 @@ Created on Thu Sep 14 13:36:52 2023
 @author: Patricia
 """
 
-import save_database as sd
-import warnings
-warnings.filterwarnings("ignore")
 import sys
 sys.path.append('./')
 import time
@@ -15,6 +12,9 @@ import numpy as np
 import pandas as pd
 import cats
 import measures as mea
+import save_database as sd
+import warnings
+warnings.filterwarnings("ignore")
 
 
 def execute_cats(name_dataset, dataset, target, step_ahead, database_path):

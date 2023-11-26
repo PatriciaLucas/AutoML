@@ -63,3 +63,4 @@ def get_datasets_all(dataset, G_list, max_lags):
         data["X"], data["y"] = organize_dataset(dataset, G_list[variable], max_lags, variable)
         dict_datasets[variable] = data
     return dict_datasets
+

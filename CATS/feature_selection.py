@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 21 07:58:04 2023
-
-@author: Patricia
-"""
-
 import pandas as pd
 import numpy as np
 from tigramite.pcmci import PCMCI
@@ -134,16 +127,6 @@ def optimize_max_lags(dataset,target):
             akaike.append(regr.aic)
 
     return lags[akaike.index(min(akaike))]
-
-
-
-
-
-
-
-
-
-
 
 
 

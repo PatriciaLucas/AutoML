@@ -89,3 +89,4 @@ def predict(test, step_ahead, bootstrap_size, dict_variables, G_list, max_lags, 
         
         
     return df_results
+

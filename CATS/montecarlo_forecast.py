@@ -56,3 +56,4 @@ def montecarlo(block, dict_variables, G_list, max_lags, step, k):
         p.append(residual + forecast)
       
     return p
+

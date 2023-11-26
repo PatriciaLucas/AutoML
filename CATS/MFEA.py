@@ -396,3 +396,4 @@ def GeneticAlgorithm(dataset, series):
             break
         
     return best_list
+

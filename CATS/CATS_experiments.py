@@ -56,7 +56,7 @@ def execute_cats(name_dataset, dataset, target, step_ahead, database_path):
 
 
 
-def run(num_experiments=10, datasets, target):
+def run(datasets, target, num_experiments):
   step_ahead = 10
   database_path = 'bd_cats.db'
 

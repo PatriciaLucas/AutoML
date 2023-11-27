@@ -1,4 +1,4 @@
-import organization as org
+import CATS.organization as org
 import numpy as np
 from sklearn.neighbors import KernelDensity
 

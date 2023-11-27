@@ -74,7 +74,7 @@ def causal_graph(dataset, target, max_lags):
     dataframe = pp.DataFrame(data, datatime = {0:np.arange(len(dataset))}, var_names=var_names)
 
     pcmci = PCMCI(dataframe=dataframe, cond_ind_test = ParCorr(significance='analytic'), verbosity=0)
-    results = pcmci.run_pcmci(tau_max=max_lags, pc_alpha=None, alpha_level=0.01)
+    results = pcmci.run_pcmci(tau_max=max_lags, pc_alpha=0.1, alpha_level=0.01)
     q_matrix = pcmci.get_corrected_pvalues(p_matrix=results['p_matrix'], tau_max=max_lags, fdr_method='fdr_bh')
     G = pcmci.get_graph_from_pmatrix(p_matrix=q_matrix, alpha_level=0.01, tau_min=0, tau_max=max_lags)
     G_list = dict.fromkeys(list(var_names), {})

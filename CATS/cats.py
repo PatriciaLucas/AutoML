@@ -30,7 +30,7 @@ def fit(train, target):
 
     for variable in dict_datasets_train:
         for m in range(num_model):
-            dict_variables[variable][m]["trained_model"], dict_variables[variable][m]["residuals"] = mg.evaluate_model(dict_variables[variable][m], dict_datasets_train[variable]['X_train'], dict_datasets_train[variable]['y_train'])
+            dict_variables[variable][m]["trained_model"], dict_variables[variable][m]["residuals"] = mg.evaluate_model(dict_variables[variable][m], dict_datasets_train[variable]['X'], dict_datasets_train[variable]['y'])
 
     return G_list, dict_variables, dict_datasets_train, max_lags
 
@@ -53,7 +53,7 @@ def predict(test, step_ahead, bootstrap_size, dict_variables, G_list, max_lags, 
 
     if step_ahead == 1:
         dict_datasets_test = org.get_datasets(test, G_list, max_lags, target)
-        forecast = model.predict(dict_datasets_test['X_train'])
+        forecast = model.predict(dict_datasets_test['X'])
         df_results[0] = forecast
     else:
 

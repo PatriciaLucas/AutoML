@@ -217,15 +217,15 @@ def predict(dataset, model, step_ahead, max_lags, G_list, target):
 
   return df_results
 
-def execute_lstm(name_dataset, dataset, target, step_ahead, max_lags, database_path):
+def execute_lstm(name_dataset, data, target, step_ahead, max_lags, database_path):
 
     execute("CREATE TABLE IF NOT EXISTS results(name_dataset TEXT, time FLOAT, max_lags INT, HPO BLOB, yhats BLOB, test BLOB, nrmse FLOAT)", database_path)
 
     start_time = time.time()
     #Normalização dos dados
     scaler = MinMaxScaler(feature_range=(0, 1))
-    scaler = scaler.fit(dataset)
-    dataset = scaler.transform(dataset)
+    scaler = scaler.fit(data)
+    dataset = scaler.transform(data)
     dataset=pd.DataFrame(dataset, columns=data.columns.values) 
 
     #Organização dos dados de acordo com os lags

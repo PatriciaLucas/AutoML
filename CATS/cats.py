@@ -1,7 +1,7 @@
-import feature_selection as fs
-import model_generation as mg
-import organization as org
-import montecarlo_forecast as bf
+import CATS.feature_selection as fs
+import CATS.model_generation as mg
+import CATS.organization as org
+import CATS.montecarlo_forecast as bf
 import pandas as pd
 import numpy as np
 

@@ -122,8 +122,12 @@ def nrmse(y_test,yhat):
     Root Mean Squared Error
     :return:
     """
+    
     maxmin = np.max(y_test) - np.min(y_test)
-    return rmse(y_test,yhat)/maxmin
+    if maxmin != 0:
+        return rmse(y_test,yhat)/maxmin
+    else:
+        return 0.0
 
 def fit_deep(model_name, dataset):
   X_train = dataset['X'].values

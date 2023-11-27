@@ -251,11 +251,12 @@ def execute_lstm(name_dataset, data, target, step_ahead, max_lags, database_path
     hiperparams = model.summary()
 
     test = dataset.loc[dataset.shape[0]-200:]
-    df_results = predict(test, model, step_ahead, max_lags, G_list, target)
 
     #Reverte a normalização
     test = scaler.inverse_transform(test)
-    df_results = scaler.inverse_transform(df_results)
+    data_test=pd.DataFrame(test, columns=data.columns.values) 
+    
+    df_results = predict(data_test, model, step_ahead, max_lags, G_list, target)
 
     #Teste
     runtime = round(time.time() - start_time, 2)
@@ -263,10 +264,10 @@ def execute_lstm(name_dataset, data, target, step_ahead, max_lags, database_path
     erro = []
 
     if step_ahead == 1:
-        erro.append(nrmse(test[target][max_lags:], df_results[0]))
+        erro.append(nrmse(data_test[target][max_lags:], df_results[0]))
     else:
         for i in range(df_results.shape[1]):
-            erro.append(nrmse(test[target][max_lags+i:],df_results[i][:df_results.shape[0]-i]))
+            erro.append(nrmse(data_test[target][max_lags+i:],df_results[i][:df_results.shape[0]-i]))
 
 
     #Salva no banco de dados
@@ -275,7 +276,7 @@ def execute_lstm(name_dataset, data, target, step_ahead, max_lags, database_path
                                                                       max_lags,
                                                                       np.array(hiperparams).tostring(),
                                                                       df_results.to_numpy().tostring(),
-                                                                      test[target].to_numpy().tostring(),
+                                                                      data_test[target].to_numpy().tostring(),
                                                                       np.array(erro).tostring()),
                   database_path)
 

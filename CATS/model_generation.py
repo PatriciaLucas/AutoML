@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
 import sys
 sys.path.append('./')
-import MFEA
+import CATS.MFEA
 
 
 def random_model():

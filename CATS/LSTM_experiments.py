@@ -222,6 +222,11 @@ def execute_lstm(name_dataset, dataset, target, step_ahead, max_lags, database_p
     execute("CREATE TABLE IF NOT EXISTS results(name_dataset TEXT, time FLOAT, max_lags INT, HPO BLOB, yhats BLOB, test BLOB, nrmse FLOAT)", database_path)
 
     start_time = time.time()
+    #Normalização dos dados
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    scaler = scaler.fit(data)
+    dataset = scaler.transform(data)
+    dataset=pd.DataFrame(dataset, columns=data.columns.values) 
 
     #Organização dos dados de acordo com os lags
     G_list = create_graph(dataset, target, max_lags)
@@ -247,6 +252,10 @@ def execute_lstm(name_dataset, dataset, target, step_ahead, max_lags, database_p
 
     test = dataset.loc[dataset.shape[0]-200:]
     df_results = predict(test, model, step_ahead, max_lags, G_list, target)
+
+    #Reverte a normalização
+    test = scaler.inverse_transform(test)
+    df_results = scaler.inverse_transform(df_results)
 
     #Teste
     runtime = round(time.time() - start_time, 2)

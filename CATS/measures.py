@@ -11,10 +11,14 @@ def rmse(y_test,yhat):
     return math.sqrt(mean_squared_error(y_test,yhat))
 
 def nrmse(y_test,yhat):
+
+    """
+    Root Mean Squared Error
+    :return:
+    """
     
-    """
-    Root Mean Squared Error 
-    :return: 
-    """
     maxmin = np.max(y_test) - np.min(y_test)
-    return rmse(y_test,yhat)/maxmin
+    if maxmin != 0:
+        return rmse(y_test,yhat)/maxmin
+    else:
+        return 0.0

@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 from operator import itemgetter
 import random
+from sklearn.ensemble import RandomForestRegressor
+import CATS.measures as measures
+from scipy.spatial import distance
 
 
 def genotype(n_estimators, min_samples_leaf, max_features, factorial_cost, factorial_rank, factorial_skill, scalar_fitness, model_size):
@@ -75,8 +78,6 @@ def phenotype(individual, X_train, y_train):
     :return: a fitted FTS model
     """
     
-    from sklearn.ensemble import RandomForestRegressor
-    
     model = RandomForestRegressor(n_estimators=individual['n_estimators'], 
                                   min_samples_leaf=individual['min_samples_leaf'],
                                   max_features=individual['max_features'],
@@ -99,7 +100,6 @@ def evaluate(dataset, individual, **kwargs):
     :param parameters: dict with model specific arguments for fit method.
     :return: a tuple (len_lags, rmse) with the parsimony fitness value and the accuracy fitness value
     """
-    import measures
 
     errors = []
     size = []
@@ -184,7 +184,6 @@ def crossover(population, divergence_matrix, max_divergence, var_names):
     :param population: the original population
     :return: a genotype
     """
-    import random
 
     n = len(population) - 1
 
@@ -273,8 +272,7 @@ def elitism(population, new_population):
     return new_population
 
 def divergence(dataset, var_names):
-    from scipy.spatial import distance
-
+   
     divergence_matrix = pd.DataFrame(columns=var_names, index=var_names)
 
     for var1 in var_names:

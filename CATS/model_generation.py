@@ -1,8 +1,5 @@
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import LinearRegression
-import sys
-sys.path.append('./')
 import CATS.MFEA as MFEA
 
 
@@ -35,8 +32,6 @@ def evaluate_model(dict_model, X_train, y_train):
     if dict_model['name'] == 'RandomForest':
         model = RandomForestRegressor(n_estimators = dict_model['hiperparam']['n_estimators'], max_features = dict_model['hiperparam']['max_features'],
                                       min_samples_leaf = dict_model['hiperparam']['min_samples_leaf'], n_jobs = -1)
-    else:
-        model = LinearRegression()
         
     model.fit(X_train, y_train)
     forecasts = model.predict(X_train)

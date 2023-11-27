@@ -10,9 +10,9 @@ sys.path.append('../')
 import time
 import numpy as np
 import pandas as pd
-import cats
-import measures as mea
-import save_database as sd
+import CATS.cats
+import CATS.measures as mea
+import CATS.save_database as sd
 import warnings
 warnings.filterwarnings("ignore")
 

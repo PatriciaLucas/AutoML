@@ -224,8 +224,8 @@ def execute_lstm(name_dataset, dataset, target, step_ahead, max_lags, database_p
     start_time = time.time()
     #Normalização dos dados
     scaler = MinMaxScaler(feature_range=(0, 1))
-    scaler = scaler.fit(data)
-    dataset = scaler.transform(data)
+    scaler = scaler.fit(dataset)
+    dataset = scaler.transform(dataset)
     dataset=pd.DataFrame(dataset, columns=data.columns.values) 
 
     #Organização dos dados de acordo com os lags

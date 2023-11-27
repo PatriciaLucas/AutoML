@@ -6,7 +6,7 @@ Created on Thu Sep 14 13:36:52 2023
 """
 
 import sys
-sys.path.append('https://github.com/PatriciaLucas/AutoML/tree/main/CATS/')
+sys.path.append('../')
 import time
 import numpy as np
 import pandas as pd

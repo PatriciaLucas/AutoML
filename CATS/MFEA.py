@@ -114,11 +114,11 @@ def evaluate(dataset, individual, **kwargs):
 
     for w in window:
         
-        X_train = dataset['X_train'].loc[w:w+params['size_train']]
-        X_test = dataset['X_train'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
+        X_train = dataset['X'].loc[w:w+params['size_train']]
+        X_test = dataset['X'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
                 
-        y_train = dataset['y_train'].loc[w:w+params['size_train']]
-        y_test = dataset['y_train'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
+        y_train = dataset['y'].loc[w:w+params['size_train']]
+        y_test = dataset['y'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
         
         
         model = phenotype(individual, X_train, y_train)

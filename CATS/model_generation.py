@@ -12,7 +12,7 @@ def initialize_model_layer(num_model, dict_datasets_train, target, series):
     # Dictionary that stores the ensembles of each variable in the database.
     dict_variables = dict.fromkeys(list(dict_datasets_train.keys()), {})
     
-    hp = MFEA.GeneticAlgorithm(dict_datasets_train, series)
+    hp, hp_list = MFEA.GeneticAlgorithm(dict_datasets_train, series)
 
     for variable in dict_variables:
         dict_ensemble = dict.fromkeys(list(range(0, num_model)), None)
@@ -24,7 +24,7 @@ def initialize_model_layer(num_model, dict_datasets_train, target, series):
         dict_variables[variable] = dict_ensemble
             
     
-    return dict_variables
+    return dict_variables, hp_list
     
 
 

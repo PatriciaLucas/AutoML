@@ -26,13 +26,13 @@ def fit(train, target):
     # MODEL SELECTION LAYER
     dict_datasets_train = org.get_datasets_all(train, G_list, max_lags)
 
-    dict_variables = mg.initialize_model_layer(num_model, dict_datasets_train, target, train)
+    dict_variables, hp_list = mg.initialize_model_layer(num_model, dict_datasets_train, target, train)
 
     for variable in dict_datasets_train:
         for m in range(num_model):
             dict_variables[variable][m]["trained_model"], dict_variables[variable][m]["residuals"] = mg.evaluate_model(dict_variables[variable][m], dict_datasets_train[variable]['X'], dict_datasets_train[variable]['y'])
 
-    return G_list, dict_variables, dict_datasets_train, max_lags
+    return G_list, dict_variables, dict_datasets_train, max_lags, hp_list
 
 
 

@@ -9,9 +9,9 @@ import numpy as np
 import pandas as pd
 from operator import itemgetter
 import random
-from scipy.spatial import distance
 from sklearn.ensemble import RandomForestRegressor
-import CATS.measures
+import CATS.measures as measures
+from scipy.spatial import distance
 
 
 def genotype(n_estimators, min_samples_leaf, max_features, factorial_cost, factorial_rank, factorial_skill, scalar_fitness, model_size):
@@ -107,7 +107,7 @@ def evaluate(dataset, individual, **kwargs):
     :param parameters: dict with model specific arguments for fit method.
     :return: a tuple (len_lags, rmse) with the parsimony fitness value and the accuracy fitness value
     """
-   
+
     errors = []
     size = []
     
@@ -121,11 +121,11 @@ def evaluate(dataset, individual, **kwargs):
 
     for w in window:
         
-        X_train = dataset['X_train'].loc[w:w+params['size_train']]
-        X_test = dataset['X_train'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
+        X_train = dataset['X'].loc[w:w+params['size_train']]
+        X_test = dataset['X'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
                 
-        y_train = dataset['y_train'].loc[w:w+params['size_train']]
-        y_test = dataset['y_train'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
+        y_train = dataset['y'].loc[w:w+params['size_train']]
+        y_test = dataset['y'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
         
         
         model = phenotype(individual, X_train, y_train)
@@ -191,7 +191,7 @@ def crossover(population, divergence_matrix, max_divergence, var_names):
     :param population: the original population
     :return: a genotype
     """
-    
+
     n = len(population) - 1
 
     r1, r2 = 0, 0

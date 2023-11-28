@@ -30,9 +30,9 @@ def initialize_model_layer(num_model, dict_datasets_train, target, series):
 
 def evaluate_model(dict_model, X_train, y_train):
 
-    model = RandomForestRegressor(n_estimators = dict_model['hiperparam'][0]['n_estimators'],
-                                  max_features = dict_model['hiperparam'][0]['max_features'],
-                                  min_samples_leaf = dict_model['hiperparam'][0]['min_samples_leaf'], 
+    model = RandomForestRegressor(n_estimators = dict_model['hiperparam']['n_estimators'],
+                                  max_features = dict_model['hiperparam']['max_features'],
+                                  min_samples_leaf = dict_model['hiperparam']['min_samples_leaf'], 
                                   n_jobs = -1)
         
     model.fit(X_train, y_train)

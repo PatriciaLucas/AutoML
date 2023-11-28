@@ -33,11 +33,8 @@ def fit(train, target):
             dict_variables[variable][m]["trained_model"], dict_variables[variable][m]["residuals"] = mg.evaluate_model(dict_variables[variable][m], dict_datasets_train[variable]['X'], dict_datasets_train[variable]['y'])
 
     return G_list, dict_variables, dict_datasets_train, max_lags, hp_list
+    
 
-
-
-
-# ENDOGENOUS PREDICTION LAYER
 def predict(test, step_ahead, bootstrap_size, dict_variables, G_list, max_lags, target):
     
     variable_delete = []
@@ -53,7 +50,7 @@ def predict(test, step_ahead, bootstrap_size, dict_variables, G_list, max_lags, 
 
     if step_ahead == 1:
         dict_datasets_test = org.get_datasets(test, G_list, max_lags, target)
-        forecast = model.predict(dict_datasets_test['X'])
+        forecast = model.predict(dict_datasets_test['X_train'])
         df_results[0] = forecast
     else:
 
@@ -75,7 +72,10 @@ def predict(test, step_ahead, bootstrap_size, dict_variables, G_list, max_lags, 
             block_nan.index = range(0,block_nan.shape[0])
             for f in range(0,step_ahead):
                 X = org.organize_block(block_nan.iloc[f:], G_list[target], max_lags)
-                forecast = model.predict(X)[0]
+                if X.isnull().any().any():
+                    break
+                else:
+                    forecast = model.predict(X)[0]
                 
                 try:
                     block_nan[target].iloc[max_lags+f] = forecast

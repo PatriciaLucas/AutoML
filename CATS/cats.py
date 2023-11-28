@@ -11,7 +11,7 @@ def fit(train, target):
     
     
     # FEATURE SELECTION LAYER
-    max_lags = fs.optimize_max_lags(train, target)
+    max_lags = fs.optimize_max_lags(train[:1000], target)
     
     G_list = fs.causal_graph(train, [target], max_lags)
     

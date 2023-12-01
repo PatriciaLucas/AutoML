@@ -5,8 +5,6 @@ Created on Thu Sep 14 13:36:52 2023
 @author: Patricia
 """
 
-import sys
-sys.path.append('../')
 import time
 import numpy as np
 import pandas as pd

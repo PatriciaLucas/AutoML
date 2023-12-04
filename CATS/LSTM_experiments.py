@@ -134,8 +134,8 @@ def fit_deep(model_name, dataset):
   Y_train = dataset['y'].values
 
   X_train = np.reshape(X_train,(X_train.shape[0],1,X_train.shape[1]))
-  X_train=np.asarray(X_train).astype(np.int)
-  Y_train=np.asarray(Y_train).astype(np.int)
+  X_train=np.asarray(X_train).astype(int)
+  Y_train=np.asarray(Y_train).astype(int)
 
   stop_early = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=5)
 
@@ -197,7 +197,7 @@ def predict(dataset, model, step_ahead, max_lags, G_list, target):
           # 1ª previsão
           X_input = organize_block(block, G_list[target], max_lags)
           X_input = np.reshape(X_input.values, (1,) + X_input.shape)
-          X_input=np.asarray(X_input).astype(np.float)
+          X_input=np.asarray(X_input).astype(float)
           forecast = model.predict(X_input)[0]
           df_results.loc[row, 0] = forecast[dataset.columns.get_loc(target)]
 
@@ -210,7 +210,7 @@ def predict(dataset, model, step_ahead, max_lags, G_list, target):
 
                 X_input = organize_block(block, G_list[target], max_lags)
                 X_input = np.reshape(X_input.values, (1,) + X_input.shape)
-                X_input=np.asarray(X_input).astype(np.float)
+                X_input=np.asarray(X_input).astype(float)
                 forecast = model.predict(X_input)[0]
 
                 df_results.loc[row, step] = forecast[dataset.columns.get_loc(target)]
@@ -244,8 +244,8 @@ def execute_lstm(name_dataset, data, target, step_ahead, max_lags, database_path
     Y_train = train['y'].values
 
     X_train = np.reshape(X_train,(X_train.shape[0],1,X_train.shape[1]))
-    X_train=np.asarray(X_train).astype(np.int)
-    Y_train=np.asarray(Y_train).astype(np.int)
+    X_train=np.asarray(X_train).astype(int)
+    Y_train=np.asarray(Y_train).astype(int)
     model.fit(X_train,Y_train, epochs = 100, verbose=1)
 
     hiperparams = model.summary()

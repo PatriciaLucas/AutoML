@@ -231,14 +231,14 @@ def execute_lstm(name_dataset, data, target, step_ahead, max_lags, database_path
     #Organização dos dados de acordo com os lags
     G_list = create_graph(dataset, target, max_lags)
 
-    train = get_datasets(dataset.loc[:2000], G_list, max_lags, target)
+    train = get_datasets(dataset.loc[:dataset.shape[0]-51], G_list, max_lags, target)
 
     #Treinamento e HPO
     tuner = fit_deep('LSTM', train)
     best_hps = tuner.get_best_hyperparameters(num_trials = 1)[0]
     model = tuner.hypermodel.build(best_hps)
 
-    train = get_datasets(dataset.loc[:dataset.shape[0]-301], G_list, max_lags, target)
+    train = get_datasets(dataset.loc[:dataset.shape[0]-51], G_list, max_lags, target)
 
     X_train = train['X'].values
     Y_train = train['y'].values
@@ -250,7 +250,7 @@ def execute_lstm(name_dataset, data, target, step_ahead, max_lags, database_path
 
     hiperparams = model.summary()
 
-    test = dataset.loc[dataset.shape[0]-300:]
+    test = dataset.loc[dataset.shape[0]-50:]
 
     #Reverte a normalização
     test = scaler.inverse_transform(test)

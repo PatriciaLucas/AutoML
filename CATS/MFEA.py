@@ -201,9 +201,8 @@ def crossover(population, divergence_matrix, max_divergence, var_names):
         
     divergence = divergence_matrix.loc[population[r1]['factorial_skill']][population[r2]['factorial_skill']]
    
-    pmut = 1 - sum(((divergence_matrix >= 0) & (divergence_matrix <= max_divergence)).sum())/((len(var_names)**2) - len(var_names))
+    pmut = 0.3
 
-   
     if divergence < max_divergence:
         
         if population[r1]['scalar_fitness'] > population[r2]['scalar_fitness'] :

@@ -1,3 +1,3 @@
 """
-CATS - Um AUTOML causal para previsão de séries temporais
+MARTS - Um Método de recomendação automática de pipelines para previsão de séries temporais multivariadas.
 """

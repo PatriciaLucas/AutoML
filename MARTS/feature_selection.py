@@ -81,23 +81,31 @@ def causal_graph(dataset, target, max_lags):
     dataframe = pp.DataFrame(data, datatime = {0:np.arange(len(dataset))}, var_names=var_names)
 
     pcmci = PCMCI(dataframe=dataframe, cond_ind_test = ParCorr(significance='analytic'), verbosity=0)
-    results = pcmci.run_pcmci(tau_max=max_lags, pc_alpha=None, alpha_level=0.01)
+    results = pcmci.run_pcmci(tau_max=max_lags, pc_alpha=0.1, alpha_level=0.01)
     q_matrix = pcmci.get_corrected_pvalues(p_matrix=results['p_matrix'], tau_max=max_lags, fdr_method='fdr_bh')
     G = pcmci.get_graph_from_pmatrix(p_matrix=q_matrix, alpha_level=0.01, tau_min=0, tau_max=max_lags)
     G_list = dict.fromkeys(list(var_names), {})
     l = []
     for var in G_list:
         G_list[var] = organize_graph(G, var_names, var)
-        if var != target[0]: G_list[var].pop(target[0])
+        if var != target and var not in "IMF": 
+            G_list[var].pop(target)
+            cols_to_drop = G_list[var].columns[G_list[var].columns.str.contains('IMF')]
+            G_list[var].drop(cols_to_drop, axis=1, inplace=True)
+        if var in "IMF":
+            G_list[var].pop(target)
         if np.all(G_list[var] == False):
             l.append(var)
 
     for k in l:
-        G_list.pop(k)
-
+        if k in G_list:
+            G_list.pop(k)
+    
+    
     for var in G_list:
         for k in l:
-            G_list[var].pop(k)
+            if k in G_list[var]:
+                G_list[var].pop(k)
     
     return G_list
 
@@ -121,7 +129,7 @@ def optimize_max_lags(dataset,target):
     akaike = []
     lags = [5,10,15,20,25,30,35,40]
     for max_lags in lags:
-        G_list = causal_graph(dataset, [target], max_lags)
+        G_list = causal_graph(dataset, target, max_lags)
         dict_dataset = util.get_datasets(dataset, G_list, max_lags, target)
         regr = OLS(np.array(dict_dataset['y_train'], dtype=float), 
                    add_constant(np.array(dict_dataset['y_train']))).fit()
@@ -137,6 +145,19 @@ def optimize_max_lags(dataset,target):
 
 
 
+def complete_graph(dataset, target, max_lags):
+
+    G_list = dict.fromkeys(list(dataset.columns.values), {})
+    
+    for var in G_list:
+        G = pd.DataFrame(np.nan, index = np.arange(0,max_lags+1), columns = dataset.columns.values)
+        for n in dataset.columns.values:
+          G[n].loc[:] = True
+        if var != target: G.pop(target)
+        G_list[var] = G.iloc[1:]
+
+    return G_list
+    
 
 
 

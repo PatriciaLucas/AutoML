@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 from operator import itemgetter
 import random
+import ray
 #from sklearn.neighbors import KernelDensity
 
 
@@ -78,11 +79,17 @@ def phenotype(individual, X_train, y_train):
     return model
 
 
+@ray.remote
+def evaluate_parallel(dataset, individual, params):
+    return evaluate(dataset, individual, params)
+
+
 def evaluate(dataset, individual, params):
     """
 
     """
     import measures
+    from sklearn.ensemble import RandomForestRegressor
 
     errors = []
     size = []
@@ -98,11 +105,26 @@ def evaluate(dataset, individual, params):
         y_train = dataset['y_train'].loc[w:w+params['size_train']]
         y_test = dataset['y_train'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
         
-        model = phenotype(individual, X_train, y_train)
+        model = RandomForestRegressor(n_estimators=individual['n_estimators'], 
+                                      min_samples_leaf=individual['min_samples_leaf'],
+                                      max_features=individual['max_features'],
+                                      bootstrap=True, n_jobs=-1, random_state=0)
+        X_train_copy = X_train.copy()
+        y_train_copy = y_train.copy()
+        model.fit(X_train_copy, y_train_copy)
         
-        forecasts = model.predict(X_test)
+        del X_train
+        del y_train
         
-        nrmse = measures.nrmse(y_test, forecasts)
+        X_test_copy = X_test.copy()
+        y_test_copy = y_test.copy()
+        forecasts = model.predict(X_test_copy)
+        
+        del X_test
+        del y_test
+        
+        mea = measures.Measures(model)
+        nrmse = mea.nrmse(y_test_copy, forecasts)
 
         errors.append(nrmse)
 
@@ -114,7 +136,7 @@ def evaluate(dataset, individual, params):
     return nrmse, size
 
 
-def tournament(population, objective, **kwargs):
+def tournament(population, objective):
     """
 
     """
@@ -300,9 +322,11 @@ def get_size(population):
         
     return population
 
-def GeneticAlgorithm(dataset, series, params):
+def GeneticAlgorithm(dataset, series, params, distributive_version):
     
-    no_improvement_count = 0
+    print("HPO started...")
+    
+    #no_improvement_count = 0
         
     new_population = []
     
@@ -311,15 +335,28 @@ def GeneticAlgorithm(dataset, series, params):
     divergence_matrix, max_divergence = divergence(series, var_names)
     
     population = initial_population(params['npop'], var_names)
-    ind = 0
-    for individual in population:
-        print(ind)
-        ind = ind + 1
-        
-        for variable in var_names:
-            individual['factorial_cost'][variable], individual['model_size'][variable] = evaluate(dataset[variable], individual, params)
+
             
+    if distributive_version:
+        n = 0
+        for individual in population:
+            print(n)
+            n = n + 1
+            results = []
+            for variable in var_names:
+                    results.append(evaluate_parallel.remote(dataset[variable], individual, params))
+            r = 0
+            parallel_results = ray.get(results)
+            for variable in var_names:
+                individual['factorial_cost'][variable], individual['model_size'][variable] = parallel_results[r][0], parallel_results[r][1]
+                r = r + 1
+    else:
+        for individual in population:
+            for variable in var_names:
+                individual['factorial_cost'][variable], individual['model_size'][variable] = evaluate(dataset[variable], individual, params)
                 
+            
+           
     population = generate_factorial_rank(population, var_names)
     population = get_skill(population)
     population = get_scalar_fitness(population)
@@ -354,15 +391,27 @@ def GeneticAlgorithm(dataset, series, params):
         
         # Crossover
         new = []
-        ind = 0
         for z in range(int(params['npop'])):
+            print(z)
             child, variable = crossover(new_population, divergence_matrix, max_divergence, var_names)
-            print(ind)
-            ind = ind + 1
-            for variable in var_names:
-                child['factorial_cost'][variable], child['model_size'][variable] = evaluate(dataset[variable], child, params)
-                child['size'] = child['model_size'][variable]
-                new.append(child)
+            
+            if distributive_version:
+                for variable in var_names:                
+                    results = []
+                    for variable in var_names:
+                        results.append(evaluate_parallel.remote(dataset[variable], child, params))
+                    
+                    r = 0
+                    parallel_results = ray.get(results)
+                    for variable in var_names:
+                        child['factorial_cost'][variable], child['model_size'][variable] = parallel_results[r][0], parallel_results[r][1]
+                        child['size'] = child['model_size'][variable]
+                        r = r + 1
+            else:
+                for variable in var_names:
+                    child['factorial_cost'][variable], child['model_size'][variable] = evaluate(dataset[variable], child, params)
+                    child['size'] = child['model_size'][variable]
+                    new.append(child)
                         
             
         new_population.extend(new)
@@ -391,15 +440,14 @@ def GeneticAlgorithm(dataset, series, params):
             
         df_best_list.append(best_list)
         
-        if best_zero[-2]['scalar_fitness'] >= best_zero[-1]['scalar_fitness']:
-            no_improvement_count +=1
-            print("WITHOUT IMPROVEMENT {}".format(no_improvement_count))
-
-        else:
-            no_improvement_count = 0
+        # if best_zero[-2]['scalar_fitness'] >= best_zero[-1]['scalar_fitness']:
+        #     no_improvement_count +=1
+        #     print("WITHOUT IMPROVEMENT {}".format(no_improvement_count))
+        # else:
+        #     no_improvement_count = 0
         
-        if no_improvement_count == params['mgen']:
-            break
+        # if no_improvement_count == params['mgen']:
+        #     break
         
         pop.append(population)
         

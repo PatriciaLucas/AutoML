@@ -8,10 +8,11 @@ Created on Tue Aug 22 13:49:15 2023
 # ENSEMBLE LAYER
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import LinearRegression
 import sys
 sys.path.append('./')
 import MFEA
+import ray
+import os
 
 
 def random_model():
@@ -19,12 +20,16 @@ def random_model():
     return name_model
 
 
-def initialize_model_layer(num_model, dict_datasets_train, target, series, params_MFEA):
+def initialize_model_layer(num_model, dict_datasets_train, target, series, params_MFEA, distributive_version, dict_variables, retraining):   
+    
     # Dictionary that stores the ensembles of each variable in the database.
     dict_variables = dict.fromkeys(list(dict_datasets_train.keys()), {})
     
-    hp = MFEA.GeneticAlgorithm(dict_datasets_train, series, params_MFEA)
-    
+    if retraining['tag']:
+        hp = retraining['hp']
+    else:
+        hp = MFEA.GeneticAlgorithm(dict_datasets_train, series, params_MFEA, distributive_version)
+
     v = 0 #variável que percorre o vetor de indivíduos retornado pelo MFEA na ordem das variáveis do dataset
     for variable in dict_variables:
         dict_ensemble = dict.fromkeys(list(range(0, num_model)), None)
@@ -35,7 +40,6 @@ def initialize_model_layer(num_model, dict_datasets_train, target, series, param
             dict_ensemble[m] = dict_model
         dict_variables[variable] = dict_ensemble
         v = v + 1
-            
     
     return dict_variables
     
@@ -47,11 +51,16 @@ def evaluate_model(dict_model, X_train, y_train):
                                   max_features = dict_model['hiperparam']['max_features'],
                                   min_samples_leaf = dict_model['hiperparam']['min_samples_leaf'], 
                                   n_jobs = -1)
-        
-    model.fit(X_train, y_train)
-    forecasts = model.predict(X_train)
-    max_lags = y_train.shape[0] - forecasts.shape[0]
-    residuals = y_train[max_lags:].values - forecasts
+    X_train_copy = X_train.copy()
+    y_train_copy = y_train.copy()
+    model.fit(X_train_copy, y_train_copy)
+    
+    del X_train
+    del y_train
+    
+    forecasts = model.predict(X_train_copy)
+    max_lags = y_train_copy.shape[0] - forecasts.shape[0]
+    residuals = y_train_copy[max_lags:].values - forecasts
     return model, residuals
 
 

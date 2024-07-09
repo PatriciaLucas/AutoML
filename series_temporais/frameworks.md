@@ -9,7 +9,8 @@
 |EvalML|||[aqui](https://dl.acm.org/doi/10.1145/3511808.3557241)|[aqui](https://github.com/alteryx/evalml)||
 |Auto-Keras: An Efficient Neural Architecture Search System|Auto-Keras_2018|2018|[aqui](https://arxiv.org/abs/1806.10282)|[aqui](https://github.com/keras-team/autokeras)||
 |AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data|AutoGluon_2020|2020|[aqui](https://arxiv.org/abs/2003.06505)|[aqui](https://github.com/awslabs/autogluon)||
-|H2O AutoML: Scalable Automatic Machine Learning|H2O_2020|2020|[aqui](https://www.automl.org/wp-content/uploads/2020/07/AutoML_2020_paper_61.pdf)|[aqui](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html)||
+|AutoGluon–TimeSeries: AutoML for Probabilistic Time Series Forecasting|AutoGluon_2023|2023|[aqui](https://arxiv.org/abs/2003.06505)|[aqui](https://auto.gluon.ai/stable/tutorials/timeseries/index.html)||
+|H2O AutoML: Scalable Automatic Machine Learning|H2O_2020|2020|[aqui](https://proceedings.mlr.press/v224/shchur23a.html)|[aqui](https://docs.h2o.ai/h2o/latest-stable/h2o-docs/automl.html)||
 |Evaluation of a Tree-based Pipeline Optimization Tool for Automating Data Science|TPOT_2016|2016|[aqui](https://dl.acm.org/doi/10.1145/2908812.2908918)|[aqui](https://epistasislab.github.io/tpot/)||
 |AutoAI-TS: AutoAI for Time Series Forecasting|AutoAI-TS_2021|2021|[aqui](https://arxiv.org/abs/2102.12347)|[aqui]([https://arxiv.org/abs/2102.12347](https://pypi.org/project/autoai-ts-libs/))|C2/03|
 |Deep feature synthesis: Towards automating data science endeavors|Kanter_2015|2015|[aqui](https://ieeexplore.ieee.org/document/7344858)|||

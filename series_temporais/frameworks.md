@@ -30,7 +30,7 @@
 |VEST: automatic feature engineering for forecasting|Vest_2021|2021|[aqui](https://link.springer.com/article/10.1007/s10994-021-05959-y)|||
 |Automated deep learning for trend prediction in time series data|Kou_2021|2021|[aqui](https://ieeexplore.ieee.org/abstract/document/9626910)|||
 |sktime: A Unified Interface for Machine Learning with Time Series|sktime_2019|2019|[aqui](https://arxiv.org/abs/1909.07872)|||
-|Forecasting at Scale|Prophet_2018|2018|[aqui](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080)||C2/05|
+|Forecasting at Scale|Prophet_2018|2018|[aqui](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080)|[aqui](https://github.com/facebook/prophet)|C2/05|
 |DeepAR: Probabilistic forecasting with autoregressive recurrent networks|DeepAR_2020|2020|[aqui](https://www.sciencedirect.com/science/article/pii/S0169207019301888)|||
 |N-BEATS: Neural basis expansion analysis for interpretable time series forecasting|N-BEATS_2019|2019|[aqui](https://arxiv.org/abs/1905.10437)||C2/04|
 |AutoTS: Automatic Time Series Forecasting Model Design Based on Two-Stage Pruning|AutoTS_2022|2022|[aqui](https://arxiv.org/pdf/2203.14169.pdf)|[aqui](https://github.com/AutoViML/Auto_TS)|C2/06|

@@ -37,4 +37,4 @@
 |AutoTS: Automatic Time Series Forecasting Model Design Based on Two-Stage Pruning|AutoTS_2022|2022|[aqui](https://arxiv.org/pdf/2203.14169.pdf)|[aqui](https://github.com/AutoViML/Auto_TS)|C2/06|
 |Dynamic selection of forecast combiners|Sergio_2016|2016|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0925231216309687?via%3Dihub)||C2/08|
 |Automated data-driven modeling of building energy systems via machine learning algorithms|Ratz_2019|2019|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0378778819316585)||C2/09|
-|PyCaret|-|-|[aqui](https://github.com/pycaret/pycaret)||-|
+|PyCaret|-|-||[aqui](https://github.com/pycaret/pycaret)|-|

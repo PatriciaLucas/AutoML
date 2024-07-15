@@ -38,7 +38,8 @@ def organize_graph(G, var_names, target):
     """
     new_G = pd.DataFrame(columns=list(range(0,G.shape[2])))
     id_target = var_names.index(target)
-    for var in range(len(var_names)):
+    len_var_names = len(var_names)
+    for var in range(len_var_names):
         new_G.loc[var] = list(G[var][id_target] == "-->")
     new_G.index = var_names
     return new_G.T.iloc[1:]
@@ -69,7 +70,8 @@ def causal_graph(dataset, target, max_lags):
     
     var_names = list(dataset.columns.values)
     
-    for var in range(len(var_names)):
+    len_var_names = len(var_names)
+    for var in range(len_var_names):
         if var == 0:
             data = dataset[var_names[var]].values.reshape((-1,1))
         else:
@@ -85,28 +87,37 @@ def causal_graph(dataset, target, max_lags):
     q_matrix = pcmci.get_corrected_pvalues(p_matrix=results['p_matrix'], tau_max=max_lags, fdr_method='fdr_bh')
     G = pcmci.get_graph_from_pmatrix(p_matrix=q_matrix, alpha_level=0.01, tau_min=0, tau_max=max_lags)
     G_list = dict.fromkeys(list(var_names), {})
+    
+    
     l = []
     for var in G_list:
         G_list[var] = organize_graph(G, var_names, var)
-        if var != target and var not in "IMF": 
-            G_list[var].pop(target)
-            cols_to_drop = G_list[var].columns[G_list[var].columns.str.contains('IMF')]
-            G_list[var].drop(cols_to_drop, axis=1, inplace=True)
-        if var in "IMF":
-            G_list[var].pop(target)
+
+        if target == "":
+            if "IMF" not in var:         
+                cols_to_drop = G_list[var].columns[G_list[var].columns.str.contains('IMF')]
+                G_list[var].drop(cols_to_drop, axis=1, inplace=True)
+        else:
+            if var != target and "IMF" not in var:
+                G_list[var].pop(target)
+
         if np.all(G_list[var] == False):
             l.append(var)
 
-    for k in l:
-        if k in G_list:
-            G_list.pop(k)
-    
+
+    set_l = set(l)
+    set_G_list = set(G_list)
+    set_intersection = set_l.intersection(set_G_list)
+    for k in set_intersection:
+        del G_list[k]
     
     for var in G_list:
-        for k in l:
-            if k in G_list[var]:
-                G_list[var].pop(k)
-    
+        set_G_list_var = set(G_list[var])
+        set_intersection = set_l.intersection(set_G_list_var)
+        for k in set_intersection:
+            del G_list[var][k]
+            
+        
     return G_list
 
 
@@ -127,7 +138,7 @@ def optimize_max_lags(dataset,target):
 
     """
     akaike = []
-    lags = [5,10,15,20,25,30,35,40]
+    lags = [5,10,15,20]
     for max_lags in lags:
         G_list = causal_graph(dataset, target, max_lags)
         dict_dataset = util.get_datasets(dataset, G_list, max_lags, target)
@@ -150,10 +161,8 @@ def complete_graph(dataset, target, max_lags):
     G_list = dict.fromkeys(list(dataset.columns.values), {})
     
     for var in G_list:
-        G = pd.DataFrame(np.nan, index = np.arange(0,max_lags+1), columns = dataset.columns.values)
-        for n in dataset.columns.values:
-          G[n].loc[:] = True
-        if var != target: G.pop(target)
+        G = pd.DataFrame(True, index = np.arange(0,max_lags+1), columns = dataset.columns.values)
+        if var != target: del G[target]
         G_list[var] = G.iloc[1:]
 
     return G_list

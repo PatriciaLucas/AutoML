@@ -10,16 +10,17 @@ import pandas as pd
 from operator import itemgetter
 import random
 import ray
-#from sklearn.neighbors import KernelDensity
+from itertools import product
+import warnings
 
 
 
-def genotype(n_estimators, min_samples_leaf, max_features, factorial_cost, factorial_rank, factorial_skill, scalar_fitness, model_size, size):
+def genotype(model,n_estimators, min_samples_leaf, max_features, factorial_cost, factorial_rank, factorial_skill, scalar_fitness, model_size, size):
     """
 
     """
 
-    ind = dict(n_estimators=n_estimators, min_samples_leaf = min_samples_leaf, max_features = max_features,
+    ind = dict(model=model, n_estimators=n_estimators, min_samples_leaf = min_samples_leaf, max_features = max_features,
                factorial_cost = factorial_cost, 
                factorial_rank = factorial_rank,
                factorial_skill = factorial_skill, 
@@ -37,9 +38,10 @@ def random_genotype(var_names):
     """
 
     return genotype(
-        random.randint(5, 1000), #n_estimators
-        random.randint(1, 30), #min_samples_leaf
-        random.choice(['sqrt', 'log2', 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]), #max_features
+        random.choice(['RandomForest', 'LGBoost', 'XGBoost']), #estimators
+        random.randint(2, 500), #n_estimators
+        random.randint(2, 30), #min_samples_leaf
+        random.choice([0.2, 0.3, 0.4, 0.5, 0.6, 0.7]), #max_features
         dict.fromkeys(list(var_names), None), #factorial_cost
         dict.fromkeys(list(var_names), None), #factorial_rank
         None, #factorial_skill
@@ -90,12 +92,16 @@ def evaluate(dataset, individual, params):
     """
     import measures
     from sklearn.ensemble import RandomForestRegressor
+    from lightgbm import LGBMRegressor
+    from xgboost import XGBRegressor
+    warnings.filterwarnings("ignore", category=UserWarning)
 
     errors = []
     size = []
     
-    window = np.arange(0, (params['size_train']*3)+params['size_test'], params['size_train'])
+    window = np.arange(0, (params['size_train']*2)+params['size_test'], params['size_train'])
     window = np.delete(window, -1)
+    
 
     for w in window:
         
@@ -105,20 +111,35 @@ def evaluate(dataset, individual, params):
         y_train = dataset['y_train'].loc[w:w+params['size_train']]
         y_test = dataset['y_train'].loc[w+params['size_train']:w+params['size_train']+params['size_test']-1]
         
-        model = RandomForestRegressor(n_estimators=individual['n_estimators'], 
-                                      min_samples_leaf=individual['min_samples_leaf'],
-                                      max_features=individual['max_features'],
-                                      bootstrap=True, n_jobs=-1, random_state=0)
+        
+        if individual['model'] == 'RandomForest':
+            model = RandomForestRegressor(n_estimators=individual['n_estimators'], 
+                                          min_samples_leaf=individual['min_samples_leaf'],
+                                          max_features=individual['max_features'],
+                                          bootstrap=True, n_jobs=-1)
+        elif individual['model'] == 'LGBoost':
+        
+            model = LGBMRegressor(n_estimators = individual['n_estimators'], 
+                                      colsample_bytree = individual['max_features'],
+                                      min_child_samples = individual['min_samples_leaf'], 
+                                      n_jobs = -1, verbosity = 0)
+        else:
+            model = XGBRegressor(n_estimators = 10,#individual['n_estimators'], 
+                                          max_depth = 6,#individual['min_samples_leaf'],
+                                          colsample_bytree = 0.5,#individual['max_features'],
+                                          subsample = 0.5)
+        
+        
         X_train_copy = X_train.copy()
         y_train_copy = y_train.copy()
-        model.fit(X_train_copy, y_train_copy)
+        model.fit(X_train_copy.values, y_train_copy.values)
         
         del X_train
         del y_train
         
         X_test_copy = X_test.copy()
         y_test_copy = y_test.copy()
-        forecasts = model.predict(X_test_copy)
+        forecasts = model.predict(X_test_copy.values)
         
         del X_test
         del y_test
@@ -130,7 +151,8 @@ def evaluate(dataset, individual, params):
 
     
     nrmse = np.mean(errors)
-    size = individual['n_estimators'] * sum([tree.tree_.max_depth for tree in model.estimators_])
+    #size = individual['n_estimators'] * sum([tree.tree_.max_depth for tree in model.estimators_])
+    size = individual['n_estimators'] * individual['min_samples_leaf']
     
      
     return nrmse, size
@@ -206,13 +228,14 @@ def crossover(population, divergence_matrix, max_divergence, var_names):
         n_estimators = int(.7 * best['n_estimators'] + .3 * worst['n_estimators'])
         min_samples_leaf = int(.7 * best['min_samples_leaf'] + .3 * worst['min_samples_leaf'])
         max_features = best['max_features']
+        model = best['model']
         
         if random.uniform(0,1) > 0.5:
             skill = best['factorial_skill']
         else:
             skill = worst['factorial_skill']
             
-        descendent = genotype(n_estimators, min_samples_leaf, max_features,
+        descendent = genotype(model, n_estimators, min_samples_leaf, max_features,
                                dict.fromkeys(list(var_names), None),
                                dict.fromkeys(list(var_names), None),
                                skill, None, dict.fromkeys(list(var_names)), None)
@@ -234,12 +257,13 @@ def mutation(individual, var_names):
     """
 
     """
-
-    n_estimators = min(1000, max(5,int(individual['n_estimators'] + (np.random.normal(0, 10)*np.random.choice([-1,1],1)[0]))))
+    n_estimators = min(500, max(5,int(individual['n_estimators'] + (np.random.normal(0, 10)*np.random.choice([-1,1],1)[0]))))
     min_samples_leaf = min(30, max(1,int(individual['min_samples_leaf'] + (np.random.normal(0, 2)*np.random.choice([-1,1],1)[0]))))
-    max_features = random.choice(['sqrt', 'log2', 0.2, 0.3, 0.4, 0.5, 0.6, 0.7])
+    #max_features = random.choice(['sqrt', 'log2'])
+    max_features = random.choice([0.2, 0.3, 0.4,0.5])
+    model = random.choice(['RandomForest', 'LGBoost', 'XGBoost'])
     
-    descendent = genotype(n_estimators, min_samples_leaf, max_features,
+    descendent = genotype(model, n_estimators, min_samples_leaf, max_features,
                            dict.fromkeys(list(var_names), None),
                            dict.fromkeys(list(var_names), None),
                            individual['factorial_skill'], None, dict.fromkeys(list(var_names)), None)
@@ -266,12 +290,12 @@ def divergence(dataset, var_names):
 
     divergence_matrix = pd.DataFrame(columns=var_names, index=var_names)
 
-    for var1 in var_names:
-        for var2 in var_names:
-            if var1 != var2:
-                divergence_matrix.loc[var1][var2] = distance.jensenshannon(dataset[var1], dataset[var2])
-            else:
-                divergence_matrix.loc[var1][var2] = -1
+    pairs = list(product(var_names, var_names))
+    for par in pairs:
+        if par[0] != par[1]:
+            divergence_matrix.loc[par[0]][par[1]] = distance.jensenshannon(dataset[par[0]], dataset[par[1]])
+        else:
+            divergence_matrix.loc[par[0]][par[1]] = -1
        
     max_divergence = np.round(max(divergence_matrix.max()/2),1)
     
@@ -290,8 +314,9 @@ def generate_factorial_rank(population, var_names):
         
         rank[variable] = rank_series.rank(method = 'min') 
         rank_dict = rank.T.to_dict()
-
-    for individual in range(len(population)):
+    
+    len_population = len(population)
+    for individual in range(len_population):
         population[individual]['factorial_rank'] = rank_dict[individual]    
     
     return population
@@ -323,24 +348,20 @@ def get_size(population):
     return population
 
 def GeneticAlgorithm(dataset, series, params, distributive_version):
-    
-    print("HPO started...")
-    
-    #no_improvement_count = 0
         
     new_population = []
     
     var_names = list(dataset.keys())
     
-    divergence_matrix, max_divergence = divergence(series, var_names)
-    
     population = initial_population(params['npop'], var_names)
 
-            
+    print("HPO started...")  
+
+    divergence_matrix, max_divergence = divergence(series, var_names)
+     
     if distributive_version:
         n = 0
         for individual in population:
-            print(n)
             n = n + 1
             results = []
             for variable in var_names:
@@ -350,13 +371,13 @@ def GeneticAlgorithm(dataset, series, params, distributive_version):
             for variable in var_names:
                 individual['factorial_cost'][variable], individual['model_size'][variable] = parallel_results[r][0], parallel_results[r][1]
                 r = r + 1
+
     else:
         for individual in population:
             for variable in var_names:
                 individual['factorial_cost'][variable], individual['model_size'][variable] = evaluate(dataset[variable], individual, params)
-                
-            
-           
+
+
     population = generate_factorial_rank(population, var_names)
     population = get_skill(population)
     population = get_scalar_fitness(population)
@@ -377,7 +398,7 @@ def GeneticAlgorithm(dataset, series, params, distributive_version):
     df_best_list.append(best_list)
         
     pop = [population]
-    best_zero = [population[0]]
+    #best_zero = [population[0]]
     
     for i in range(params['ngen']):
         print("GENERATION {}".format(i))
@@ -392,26 +413,26 @@ def GeneticAlgorithm(dataset, series, params, distributive_version):
         # Crossover
         new = []
         for z in range(int(params['npop'])):
-            print(z)
+
             child, variable = crossover(new_population, divergence_matrix, max_divergence, var_names)
             
-            if distributive_version:
-                for variable in var_names:                
-                    results = []
-                    for variable in var_names:
-                        results.append(evaluate_parallel.remote(dataset[variable], child, params))
-                    
-                    r = 0
-                    parallel_results = ray.get(results)
-                    for variable in var_names:
-                        child['factorial_cost'][variable], child['model_size'][variable] = parallel_results[r][0], parallel_results[r][1]
-                        child['size'] = child['model_size'][variable]
-                        r = r + 1
+            if distributive_version:               
+                results = []
+                for variable in var_names:
+                    results.append(evaluate_parallel.remote(dataset[variable], child, params))
+                
+                r = 0
+                parallel_results = ray.get(results)
+                for variable in var_names:
+                    child['factorial_cost'][variable], child['model_size'][variable] = parallel_results[r][0], parallel_results[r][1]
+                    child['size'] = child['model_size'][variable]
+                    r = r + 1
+                new.append(child)
             else:
                 for variable in var_names:
                     child['factorial_cost'][variable], child['model_size'][variable] = evaluate(dataset[variable], child, params)
                     child['size'] = child['model_size'][variable]
-                    new.append(child)
+                new.append(child)
                         
             
         new_population.extend(new)
@@ -425,20 +446,20 @@ def GeneticAlgorithm(dataset, series, params, distributive_version):
         population = sorted(population, key=itemgetter('scalar_fitness'))
 
         population = population[:params['npop']]
-        
-        best_zero.append(population[0])
-        
+                
+        #best_zero.append(population[0])
         
         best_list = []
         df_best = pd.DataFrame(columns=population[0]['factorial_cost'].keys())
 
         for ind in population:
             df_best.loc[len(df_best)] = np.array(list(ind['factorial_cost'].values())).reshape(1,-1)[0]
-        
+            
         for var in var_names:
             best_list.append(population[df_best[[var]].idxmin()[0]])
             
         df_best_list.append(best_list)
+
         
         # if best_zero[-2]['scalar_fitness'] >= best_zero[-1]['scalar_fitness']:
         #     no_improvement_count +=1
@@ -451,7 +472,7 @@ def GeneticAlgorithm(dataset, series, params, distributive_version):
         
         pop.append(population)
         
-    return df_best_list[-1]
+    return df_best_list, pop
 
 
     

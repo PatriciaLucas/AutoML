@@ -9,6 +9,7 @@ import math
 import numpy as np
 from sklearn.metrics import mean_squared_error
 
+
 class Measures():
     def __init__(self, model):
         self.model = model
@@ -28,7 +29,7 @@ class Measures():
         Root Mean Squared Error 
         :return: 
         """
-        maxmin = np.max(real) - np.min(forecast)
+        maxmin = abs(np.max(real) - np.min(forecast))
         
         if maxmin == 0:
             maxmin = 0.00001
@@ -74,6 +75,7 @@ class Measures():
         
 
         for step in range(0,forecast.shape[0]):
+            print(real[self.model.target][self.model.max_lags+step:].shape)
             measures['nrmse'].append(self.nrmse(real[self.model.target][self.model.max_lags+step:], forecast.loc[step,:forecast.shape[1]-(step+1)].to_frame()))
             measures['rmse'].append(self.rmse(real[self.model.target][self.model.max_lags+step:], forecast.loc[step,:forecast.shape[1]-(step+1)].to_frame()))
             measures['mape'].append(self.mape(real[self.model.target][self.model.max_lags+step:], forecast.loc[step,:forecast.shape[1]-(step+1)].to_frame()))

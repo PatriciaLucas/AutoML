@@ -6,14 +6,14 @@ Created on Thu Aug 31 14:53:57 2023
 """
 
 import util
-from sklearn.neighbors import KernelDensity
 import ray
 import random
 
 
-def exogenous_forecast(step_ahead, block, max_lags, target, dict_variables, G_list):
 
-    for step in range(step_ahead-2):
+def exogenous_forecast(step_ahead, block, max_lags, dict_variables, G_list):
+
+    for step in range(step_ahead):
             
         p = []
         
@@ -27,15 +27,22 @@ def exogenous_forecast(step_ahead, block, max_lags, target, dict_variables, G_li
         block.index = range(0,block.shape[0])
             
     
-    block = block[block.shape[0] - (step_ahead - 1):]
+    block = block[block.shape[0] - (step_ahead):]
     block.index = range(0,block.shape[0])
     
     return block
 
 @ray.remote
 def until_organize_block(block, G_list, max_lags, variable, dict_variables):
-    model = dict_variables[variable][0]['trained_model']
+    model = dict_variables[variable]['trained_model']
     X_input = util.organize_block(block, G_list[variable], max_lags)
-    forecast = model.predict(X_input)[0]
-    residual = random.choice(dict_variables[variable][0]['residuals'])
+    forecast = model.predict(X_input.values)[0]
+    residual = random.choice(dict_variables[variable]['residuals'])
     return residual + forecast
+
+
+
+
+        
+        
+        

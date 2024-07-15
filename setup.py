@@ -2,7 +2,7 @@ import setuptools
 from setuptools import find_packages
 
 setuptools.setup(
-    name='CATS',
+    name='MARTS',
     install_requires=[
           'matplotlib',
           'numpy',

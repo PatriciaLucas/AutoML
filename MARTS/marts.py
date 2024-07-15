@@ -4,6 +4,9 @@ Created on Tue Sep  5 08:17:53 2023
 
 @author: Patricia
 """
+
+import sys
+sys.path.append('./')
 import feature_selection as fs
 import model_generation as mg
 import util
@@ -16,7 +19,6 @@ import random
 import pickle
 import emd
 from sklearn.neighbors import KernelDensity
-#from sklearn.preprocessing import StandardScaler
 
 
 class Marts():

@@ -4,9 +4,8 @@ Created on Thu Aug 31 14:53:57 2023
 
 @author: Patricia
 """
-import sys
-sys.path.append('./')
-import util
+
+from MARTS import util
 import ray
 import random
 

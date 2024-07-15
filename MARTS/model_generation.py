@@ -8,9 +8,7 @@ Created on Tue Aug 22 13:49:15 2023
 # ENSEMBLE LAYER
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
-import sys
-sys.path.append('./')
-import MFEA
+from MARTS import MFEA
 import random
 from lightgbm import LGBMRegressor
 from xgboost import XGBRegressor

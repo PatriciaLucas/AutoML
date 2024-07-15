@@ -4,9 +4,7 @@ Created on Mon Aug 21 07:58:04 2023
 
 @author: Patricia
 """
-import sys
-sys.path.append('./')
-
+from MARTS import util
 import pandas as pd
 import numpy as np
 from tigramite.pcmci import PCMCI
@@ -15,7 +13,6 @@ from tigramite.independence_tests.parcorr import ParCorr
 from stationarizer import simple_auto_stationarize
 from statsmodels.regression.linear_model import OLS
 from statsmodels.tools import add_constant
-import util
 
 import warnings
 warnings.filterwarnings("ignore")

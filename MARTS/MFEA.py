@@ -90,7 +90,7 @@ def evaluate(dataset, individual, params):
     """
 
     """
-    import measures
+    from MARTS import measures
     from sklearn.ensemble import RandomForestRegressor
     from lightgbm import LGBMRegressor
     from xgboost import XGBRegressor

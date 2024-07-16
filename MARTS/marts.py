@@ -89,9 +89,7 @@ class Marts():
             train = dataset.loc[:dataset.shape[0]-self.test_size+1]
             self.test = dataset.loc[dataset.shape[0]-self.test_size:]
             
-        print(train.shape)
-        print(self.test.shape)
-        
+        print(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags])
         # FEATURE SELECTION LAYER
         self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
         #self.max_lags = 5

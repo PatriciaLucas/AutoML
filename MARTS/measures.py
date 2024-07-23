@@ -7,7 +7,8 @@ Created on Thu Aug 31 10:23:36 2023
 
 import math
 import numpy as np
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+
 
 
 class Measures():
@@ -42,7 +43,8 @@ class Measures():
         """
         Mean Average Percentual Error
         :return: 
-        """        
+        """ 
+
         return np.mean(np.abs(np.divide(np.subtract(real.values, forecast.values), forecast.values))) * 100
     
     

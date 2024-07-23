@@ -51,25 +51,30 @@ def initialize_model_layer(dict_datasets_train, target, series, params_MFEA, dis
 def evaluate_model(dict_model, X_train, y_train):
     warnings.filterwarnings("ignore", category=UserWarning)
     
+    X_train_copy = X_train.copy()
+    y_train_copy = y_train.copy()
+    
     if dict_model['name'] == 'RandomForest':
         model = RandomForestRegressor(n_estimators = dict_model['hiperparam']['n_estimators'], 
                                   max_features = dict_model['hiperparam']['max_features'],
                                   min_samples_leaf = dict_model['hiperparam']['min_samples_leaf'], 
                                   bootstrap=True, n_jobs = -1)
+        model.fit(X_train_copy.values, y_train_copy.values)
     elif dict_model['name'] == 'LGBoost':
         model = LGBMRegressor(n_estimators = dict_model['hiperparam']['n_estimators'], 
                                   colsample_bytree = dict_model['hiperparam']['max_features'],
                                   min_child_samples = dict_model['hiperparam']['min_samples_leaf'], 
-                                  n_jobs = -1, verbosity = 0)
+                                  n_jobs = -1, verbosity = -1)
+        model.fit(X_train_copy.values, y_train_copy.values)
     else:
         model = XGBRegressor(n_estimators = dict_model['hiperparam']['n_estimators'], 
                                   colsample_bytree = dict_model['hiperparam']['max_features'],
                                   max_depth = dict_model['hiperparam']['min_samples_leaf'],
                                   subsample = 0.5)
+        model.fit(X_train_copy.values, y_train_copy.values)
         
-    X_train_copy = X_train.copy()
-    y_train_copy = y_train.copy()
-    model.fit(X_train_copy.values, y_train_copy.values)
+    
+    
     
     del X_train
     del y_train

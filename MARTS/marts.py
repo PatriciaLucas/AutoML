@@ -10,6 +10,8 @@ from MARTS import feature_selection as fs
 from MARTS import model_generation as mg
 from MARTS import util
 from MARTS import forecast as fo
+
+
 import pandas as pd
 import numpy as np
 import ray
@@ -89,7 +91,7 @@ class Marts():
             train = dataset.loc[:dataset.shape[0]-self.test_size+1]
             self.test = dataset.loc[dataset.shape[0]-self.test_size:]
             
-        print(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags])
+
         # FEATURE SELECTION LAYER
         self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
         #self.max_lags = 5
@@ -108,12 +110,21 @@ class Marts():
         else:
             print("Gera grafo completo")
             self.G_list = fs.complete_graph(train, self.target, self.max_lags)        
-                
+        
+        
+        # DELETA VARIÁVEIS QUE NÃO ESTÃO NO GRAFO CAUSAL
         variable_delete = []
         train_columns_values = set(list(train.columns.values))
         keys_G_list = set(self.G_list)
         variable_delete  = train_columns_values - keys_G_list
         train = train.drop(variable_delete, axis=1)
+        
+        variable_delete = []
+        test_columns_values = set(list(self.test.columns.values))
+        keys_G_list = set(self.G_list)
+        variable_delete  = test_columns_values - keys_G_list
+        self.test = self.test.drop(variable_delete, axis=1)
+        self.test.index = range(0,self.test.shape[0])
         
         
         if variable_delete:
@@ -217,33 +228,26 @@ class Marts():
     
     # ENDOGENOUS PREDICTION LAYER
     def predict_decom(self, step_ahead):
+            print("MODEL PREDICTING")
             test = self.test
-            test.index = range(0,test.shape[0])
+            print(self.test.shape)
         
             if self.distributive_version:
                 num_cpu = os.cpu_count()
                 
                 if not ray.is_initialized():
                     ray.init(num_cpus=num_cpu)
-            
-
-            variable_delete = []
-            test_columns_values = set(list(test.columns.values))
-            keys_G_list = set(self.G_list)
-            variable_delete  = test_columns_values - keys_G_list
-            test = test.drop(variable_delete, axis=1)
-        
-        
-            #model = self.dict_variables[self.target]['trained_model']
-            #residual = self.dict_variables[self.target]['residuals']
                 
             df_results = pd.DataFrame()
         
-            test.index = range(0,test.shape[0])
+            #test.index = range(0,test.shape[0])
             test_minus_max_lags = test.shape[0] - self.max_lags
             for row in range(test_minus_max_lags):
                 
-                block = test.loc[row:row + self.max_lags]
+                print(row)
+                
+                block = test.loc[row:row + self.max_lags - 1]
+                block.index = range(0,block.shape[0])
                 
                 ### EXOGENOUS PREDICTION LAYER
                 block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list)

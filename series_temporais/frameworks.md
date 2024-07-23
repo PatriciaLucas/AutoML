@@ -38,3 +38,4 @@
 |Dynamic selection of forecast combiners|Sergio_2016|2016|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0925231216309687?via%3Dihub)||C2/08|
 |Automated data-driven modeling of building energy systems via machine learning algorithms|Ratz_2019|2019|[aqui](https://www.sciencedirect.com/science/article/abs/pii/S0378778819316585)||C2/09|
 |PyCaret|-|-||[aqui](https://github.com/pycaret/pycaret)|-|
+|auto-sktime: Automated Time Series Forecasting|auto-sktime_2024|2024|[aqui](https://arxiv.org/pdf/2312.08528)|[aqui](https://github.com/Ennosigaeon/auto-sktime)|C2/54|

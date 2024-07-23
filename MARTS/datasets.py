@@ -15,19 +15,42 @@ def get_univariate(name, target):
     elif name == 'ECONOMICS_2':
         return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_2.csv', index_col=('Date'))[target]
     elif name == 'ECONOMICS_3':
-        return "I'm a teapot"
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_3.csv', index_col=('Date'))[target]
+    elif name == 'ECONOMICS_4':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_4.csv', index_col=('Date'))[target]
+    elif name == 'ECONOMICS_5':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_5.csv', index_col=('Date'))[target]
+    elif name == 'ECONOMICS_6':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_6.csv', index_col=('Date'))[target]
+    elif name == 'ECONOMICS_7':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_7.csv', index_col=('Date'))[target]
+    
+    
+    
+    
+    
+    
+    
     else:
         return "There is no dataset with that name."
     
 
 
-def get_nultivariate(name):
+def get_multivariate(name):
     
     if name == 'ECONOMICS_1':
-        return pd.read_csv('C:/Users/Patricia/OneDrive/Área de Trabalho/PROJETO MARTS/datasets/FINANCE/DOWJONES.csv', index_col=('Date'))
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_1.csv', index_col=('Date'))
     elif name == 'ECONOMICS_2':
-        return "Not found"
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_2.csv', index_col=('Date'))
     elif name == 'ECONOMICS_3':
-        return "I'm a teapot"
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_3.csv', index_col=('Date'))
+    elif name == 'ECONOMICS_4':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_4.csv', index_col=('Date'))
+    elif name == 'ECONOMICS_5':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_5.csv', index_col=('Date'))
+    elif name == 'ECONOMICS_6':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_6.csv', index_col=('Date'))
+    elif name == 'ECONOMICS_7':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ECONOMICS_7.csv', index_col=('Date'))
     else:
         return "There is no dataset with that name."

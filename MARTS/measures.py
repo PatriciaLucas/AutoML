@@ -77,11 +77,10 @@ class Measures():
         
 
         for step in range(0,forecast.shape[0]):
-            print(real[self.model.target][self.model.max_lags+step:].shape)
-            measures['nrmse'].append(self.nrmse(real[self.model.target][self.model.max_lags+step:], forecast.loc[step,:forecast.shape[1]-(step+1)].to_frame()))
-            measures['rmse'].append(self.rmse(real[self.model.target][self.model.max_lags+step:], forecast.loc[step,:forecast.shape[1]-(step+1)].to_frame()))
-            measures['mape'].append(self.mape(real[self.model.target][self.model.max_lags+step:], forecast.loc[step,:forecast.shape[1]-(step+1)].to_frame()))
-            measures['theil'].append(self.theil(real[self.model.target][self.model.max_lags+step:].values, forecast.loc[step,:forecast.shape[1]-(step+1)].values, step))
+            measures['nrmse'].append(self.nrmse(real[step:], forecast.loc[step,:forecast.shape[1]-step-1]))
+            measures['rmse'].append(self.rmse(real[step:], forecast.loc[step,:forecast.shape[1]-step-1]))
+            measures['mape'].append(self.mape(real[step:], forecast.loc[step,:forecast.shape[1]-step-1]))
+            measures['theil'].append(self.theil(real[step:].values, forecast.loc[step,:forecast.shape[1]-step-1].values, step))
 
         return measures
 

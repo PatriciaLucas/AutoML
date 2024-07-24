@@ -85,17 +85,21 @@ class Marts():
             dataset = pd.concat([dataset,self.imfs], axis=1)
                     
             train = dataset.loc[:dataset.shape[0]-self.test_size+1]
-            self.test = dataset.loc[dataset.shape[0]-self.test_size:]
-            self.target_test = self.test[self.target]
+            #self.test = dataset.loc[dataset.shape[0]-self.test_size:]
+            #self.target_test = self.train[self.target]
         else:
             train = dataset.loc[:dataset.shape[0]-self.test_size+1]
-            self.test = dataset.loc[dataset.shape[0]-self.test_size:]
+            #self.test = dataset.loc[dataset.shape[0]-self.test_size:]
             
 
         # FEATURE SELECTION LAYER
         self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
-        #self.max_lags = 5
         print(f"Number of lags: {self.max_lags}")
+        
+        #Separa os dados de teste de acordo com os lags
+        self.test = dataset.loc[dataset.shape[0]-self.test_size-self.max_lags:]
+        self.target_test = dataset.loc[dataset.shape[0]-self.test_size:][self.target]
+        self.target_test.index = range(0,self.target_test.shape[0])
         
         
         if self.feature_selection:
@@ -144,7 +148,7 @@ class Marts():
         for variable in self.dict_datasets_train:
             self.dict_variables[variable]["trained_model"], self.dict_variables[variable]["residuals"] = mg.evaluate_model(self.dict_variables[variable], self.dict_datasets_train[variable]['X_train'], self.dict_datasets_train[variable]['y_train'])
 
-            
+
         if self.save_model:
             with open(self.path_model+".pickle", 'wb') as f:
                 # Pickle the 'data' dictionary using the highest protocol available.
@@ -259,6 +263,10 @@ class Marts():
             if self.distributive_version:
                 if ray.is_initialized():
                     ray.shutdown() 
+                    
+            #Retira os lags finais do treino
+            #self.test = self.test.loc[self.max_lags:]
+            #self.test.index = range(0,self.test.shape[0])
 
             return df_results
     

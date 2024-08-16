@@ -55,7 +55,6 @@ plt.plot(range(0,test.shape[0]),df_results.loc[0])
 mea = measures.Measures(model)
 results = mea.score(test, df_results)
 
-step = 2
-mea.nrmse(test[step:], df_results.loc[step,:df_results.shape[1]-step-1])
+
 
 

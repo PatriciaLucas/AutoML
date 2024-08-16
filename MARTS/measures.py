@@ -12,8 +12,8 @@ from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
 
 
 class Measures():
-    def __init__(self, model):
-        self.model = model
+    def __init__(self, name="metrics"):
+        self.name = name
 
 
     def rmse(self, y_test,yhat):

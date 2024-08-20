@@ -238,7 +238,6 @@ class Marts():
     def predict_decom(self, step_ahead):
             print("MODEL PREDICTING")
             test = self.test
-            print(self.test.shape)
         
             if self.distributive_version:
                 num_cpu = os.cpu_count()
@@ -254,8 +253,6 @@ class Marts():
             else:
                 test_minus_max_lags = 1
             for row in range(test_minus_max_lags):
-                
-                print(row)
                 
                 block = test.loc[row:row + self.max_lags - 1]
                 block.index = range(0,block.shape[0])

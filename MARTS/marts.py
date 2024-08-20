@@ -98,8 +98,12 @@ class Marts():
         
         #Separa os dados de teste de acordo com os lags
         self.test = dataset.loc[dataset.shape[0]-self.test_size-self.max_lags:]
-        self.target_test = dataset.loc[dataset.shape[0]-self.test_size:][self.target]
-        self.target_test.index = range(0,self.target_test.shape[0])
+        #self.target_test = dataset.loc[dataset.shape[0]-self.test_size:][self.target]
+        #self.target_test.index = range(0,self.target_test.shape[0])
+        
+        if self.test_size != 0:
+          self.target_test = dataset.loc[dataset.shape[0]-self.test_size:][self.target]
+          self.target_test.index = range(0,self.target_test.shape[0])
         
         
         if self.feature_selection:
@@ -245,7 +249,10 @@ class Marts():
             df_results = pd.DataFrame()
         
             #test.index = range(0,test.shape[0])
-            test_minus_max_lags = test.shape[0] - self.max_lags
+            if self.test_size != 0:
+                test_minus_max_lags = test.shape[0] - self.max_lags
+            else:
+                test_minus_max_lags = 1
             for row in range(test_minus_max_lags):
                 
                 print(row)

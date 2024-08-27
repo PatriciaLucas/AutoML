@@ -44,7 +44,12 @@ model = marts.Marts(params_MFEA = params_MFEA, feature_selection = True, distrib
                     save_model = False, decomposition = True, test_size=dataset.shape[0]*test_size, size_dataset_optimize_max_lags=3,
                     optimize_hiperparams = True)
 model.fit(dataset, target)
-df_results = model.predict_decom(step_ahead=step_ahead)
+
+
+df_results = model.predict_decom(step_ahead=1)
+
+a = model.dict_datasets_test
+
 
 test = model.target_test
 import matplotlib.pyplot as plt

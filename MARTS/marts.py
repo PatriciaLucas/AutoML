@@ -44,6 +44,7 @@ class Marts():
         self.G_list = {}
         self.dict_variables = {}
         self.dict_datasets_train = {}
+        self.dict_datasets_test = {}
         self.max_lags = max_lags
         self.target = ''
         self.target_test = []
@@ -235,7 +236,7 @@ class Marts():
             return df_results
     
     # ENDOGENOUS PREDICTION LAYER
-    def predict_decom(self, step_ahead):
+    def predict_decom_ahead(self, step_ahead):
             print("MODEL PREDICTING")
             test = self.test
         
@@ -273,6 +274,34 @@ class Marts():
             #self.test.index = range(0,self.test.shape[0])
 
             return df_results
+        
+    def predict_decom(self):
+            print("MODEL PREDICTING 4")
+            test = self.test
+            
+            print(test.shape)
+        
+            if self.distributive_version:
+                num_cpu = os.cpu_count()
+                
+                if not ray.is_initialized():
+                    ray.init(num_cpus=num_cpu)
+                
+            df_results = pd.DataFrame()
+            
+            self.dict_datasets_test = util.get_datasets_all(test, self.G_list, self.max_lags, self.distributive_version)
+            
+            forecast = pd.DataFrame(columns=self.dict_datasets_test.keys())
+
+            for variable in self.dict_datasets_train:
+                model = self.dict_variables[variable]['trained_model']
+                forecast[variable] = model.predict(self.dict_datasets_test[variable]['X_train'])
+            
+            imfs = forecast.filter(regex='IMF')
+            
+            df_results = pd.DataFrame(imfs.sum(axis=1).values)
+
+            return df_results.T
     
     def predict_prob(self, step_ahead, prob_forecast=False):
             test = self.test

@@ -54,11 +54,11 @@ a = model.dict_datasets_test
 test = model.target_test
 import matplotlib.pyplot as plt
 plt.plot(range(0,test.shape[0]),test)
-plt.plot(range(0,test.shape[0]),df_results.loc[0])
+plt.plot(range(0,test.shape[0]),df_results.values)
 
 
 mea = measures.Measures(model)
-results = mea.score(test, df_results)
+results = mea.score(test, df_results.T)
 
 
 

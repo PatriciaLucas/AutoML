@@ -34,6 +34,25 @@ def get_univariate(name, target):
         return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ENERGY_4.csv', index_col=('Date'))[target]
     elif name == 'ENERGY_5':
         return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/ENERGY_5.csv', index_col=('Date'))[target]
+    elif name == 'CLIMATIC_1':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/CLIMATIC_1.csv', index_col=('Date'))[target]
+    elif name == 'CLIMATIC_2':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/CLIMATIC_2.csv', index_col=('Date'))[target]
+    elif name == 'CLIMATIC_3':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/CLIMATIC_3.csv', index_col=('Date'))[target]
+    elif name == 'MOTOR':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/MOTOR.csv', index_col=('Date'))[target]
+    elif name == 'IOT_1':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_1.csv', index_col=('Date'))[target]
+    elif name == 'IOT_2':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_2.csv', index_col=('Date'))[target]
+    elif name == 'IOT_3':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_3.csv', index_col=('Date'))[target]
+    elif name == 'IOT_4':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_4.csv', index_col=('Date'))[target]
+    elif name == 'IOT_5':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_5.csv', index_col=('Date'))[target]
+   
     
     
     

@@ -5,6 +5,7 @@ Created on Mon Aug 21 07:58:04 2023
 @author: Patricia
 """
 from MARTS import util
+
 import pandas as pd
 import numpy as np
 from tigramite.pcmci import PCMCI
@@ -138,6 +139,7 @@ def optimize_max_lags(dataset,target):
     """
     akaike = []
     lags = [5,10,15,20]
+    
     for max_lags in lags:
         G_list = causal_graph(dataset, target, max_lags)
         dict_dataset = util.get_datasets(dataset, G_list, max_lags, target)

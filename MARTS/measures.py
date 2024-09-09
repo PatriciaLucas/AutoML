@@ -7,7 +7,7 @@ Created on Thu Aug 31 10:23:36 2023
 
 import math
 import numpy as np
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+from sklearn.metrics import mean_squared_error
 
 
 

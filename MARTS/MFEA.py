@@ -64,22 +64,30 @@ def initial_population(n, var_names):
     return pop
 
 
-def phenotype(individual, X_train, y_train):
-    """
 
-    """
-    
-    from sklearn.ensemble import RandomForestRegressor
-    
-    model = RandomForestRegressor(n_estimators=individual['n_estimators'], 
-                                  min_samples_leaf=individual['min_samples_leaf'],
-                                  max_features=individual['max_features'],
-                                  bootstrap=True, n_jobs=-1, random_state=0)
-    
-    model.fit(X_train, y_train)
 
-    return model
+def LGBoost_depth(tree):
+    if 'leaf_index' in tree:
+        return 1
+    else:
+        left_depth = LGBoost_depth(tree['left_child'])
+        right_depth = LGBoost_depth(tree['right_child'])
+        return max(left_depth, right_depth) + 1
 
+def XGBoost_depth(tree_dump):
+    lines = tree_dump.split('\n')
+    depths = [0]  # List to store the depth of each node
+    max_depth = 0
+    
+    for line in lines:
+        if line.strip() == '':
+            continue
+        depth = line.count('\t')
+        depths.append(depth)
+        if depth > max_depth:
+            max_depth = depth
+    
+    return max_depth
 
 @ray.remote
 def evaluate_parallel(dataset, individual, params):
@@ -90,6 +98,7 @@ def evaluate(dataset, individual, params):
     """
 
     """
+    
     from MARTS import measures
     from sklearn.ensemble import RandomForestRegressor
     from lightgbm import LGBMRegressor
@@ -122,11 +131,11 @@ def evaluate(dataset, individual, params):
             model = LGBMRegressor(n_estimators = individual['n_estimators'], 
                                       colsample_bytree = individual['max_features'],
                                       min_child_samples = individual['min_samples_leaf'], 
-                                      n_jobs = -1, verbosity = 0)
+                                      n_jobs = -1, verbosity = -1)
         else:
-            model = XGBRegressor(n_estimators = 10,#individual['n_estimators'], 
-                                          max_depth = 6,#individual['min_samples_leaf'],
-                                          colsample_bytree = 0.5,#individual['max_features'],
+            model = XGBRegressor(n_estimators = individual['n_estimators'], 
+                                          colsample_bytree = individual['max_features'],
+                                          min_child_weight = individual['min_samples_leaf'],
                                           subsample = 0.5)
         
         
@@ -152,9 +161,25 @@ def evaluate(dataset, individual, params):
     
     nrmse = np.mean(errors)
     #size = individual['n_estimators'] * sum([tree.tree_.max_depth for tree in model.estimators_])
-    size = individual['n_estimators'] * individual['min_samples_leaf']
+    #size = individual['n_estimators'] * individual['min_samples_leaf']
     
-     
+    if individual['model'] == 'RandomForest':
+        size = individual['n_estimators'] * sum([tree.tree_.max_depth for tree in model.estimators_])
+        print("size")
+        print(size)
+    elif individual['model'] == 'LGBoost':
+        booster = model.booster_
+        trees = booster.dump_model()['tree_info']
+        size = individual['n_estimators'] * [LGBoost_depth(tree['tree_structure']) for tree in trees]
+        print("size")
+        print(size)
+    else:
+        booster = model.get_booster()
+        trees_dump = booster.get_dump(with_stats=True)
+        size = individual['n_estimators'] * [XGBoost_depth(tree) for tree in trees_dump]
+        print("size")
+        print(size)
+        
     return nrmse, size
 
 

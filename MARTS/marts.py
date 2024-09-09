@@ -11,7 +11,6 @@ from MARTS import model_generation as mg
 from MARTS import util
 from MARTS import forecast as fo
 
-
 import pandas as pd
 import numpy as np
 import ray

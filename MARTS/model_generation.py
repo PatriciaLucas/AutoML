@@ -8,7 +8,8 @@ Created on Tue Aug 22 13:49:15 2023
 # ENSEMBLE LAYER
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
-from MARTS import MFEA
+#from MARTS import MFEA
+import MFEA
 import random
 from lightgbm import LGBMRegressor
 from xgboost import XGBRegressor
@@ -69,7 +70,7 @@ def evaluate_model(dict_model, X_train, y_train):
     else:
         model = XGBRegressor(n_estimators = dict_model['hiperparam']['n_estimators'], 
                                   colsample_bytree = dict_model['hiperparam']['max_features'],
-                                  max_depth = dict_model['hiperparam']['min_samples_leaf'],
+                                  min_child_weight = dict_model['hiperparam']['min_samples_leaf'],
                                   subsample = 0.5)
         model.fit(X_train_copy.values, y_train_copy.values)
         

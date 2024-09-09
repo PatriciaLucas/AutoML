@@ -165,20 +165,14 @@ def evaluate(dataset, individual, params):
     
     if individual['model'] == 'RandomForest':
         size = individual['n_estimators'] * sum([tree.tree_.max_depth for tree in model.estimators_])
-        print("size")
-        print(size)
     elif individual['model'] == 'LGBoost':
         booster = model.booster_
         trees = booster.dump_model()['tree_info']
         size = individual['n_estimators'] * sum([LGBoost_depth(tree['tree_structure']) for tree in trees])
-        print("size")
-        print(size)
     else:
         booster = model.get_booster()
         trees_dump = booster.get_dump(with_stats=True)
         size = individual['n_estimators'] * sum([XGBoost_depth(tree) for tree in trees_dump])
-        print("size")
-        print(size)
         
     return nrmse, size
 

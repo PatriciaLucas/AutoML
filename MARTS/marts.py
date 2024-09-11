@@ -19,6 +19,7 @@ import random
 import pickle
 import emd
 from sklearn.neighbors import KernelDensity
+import datetime
 
 
 class Marts():
@@ -59,6 +60,8 @@ class Marts():
 
     def fit(self, dataset, target):
         
+        print(f"Start time: {datetime.datetime.now()}")
+        
         dataset.index = range(0,dataset.shape[0])
         
         if self.distributive_version:
@@ -97,7 +100,7 @@ class Marts():
             self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
         except:
             self.max_lags = 5
-        print(f"Number of lags: {self.max_lags}")
+        print(f"Lag window size: {self.max_lags}")
         
         #Separa os dados de teste de acordo com os lags
         self.test = dataset.loc[dataset.shape[0]-self.test_size-self.max_lags:]
@@ -167,78 +170,8 @@ class Marts():
                 ray.shutdown()  
         
     
-    
     # ENDOGENOUS PREDICTION LAYER
-    def predict(self, step_ahead):
-            test = self.test
-            test.index = range(0,test.shape[0])
-        
-            if self.distributive_version:
-                num_cpu = os.cpu_count()
-                
-                if not ray.is_initialized():
-                    ray.init(num_cpus=num_cpu)
-            
-
-            variable_delete = []
-            test_columns_values = set(list(test.columns.values))
-            keys_G_list = set(self.G_list)
-            variable_delete  = test_columns_values - keys_G_list
-            test = test.drop(variable_delete, axis=1)
-        
-        
-            model = self.dict_variables[self.target]['trained_model']
-            residual = self.dict_variables[self.target]['residuals']
-                
-            df_results = pd.DataFrame()   
-        
-            test.index = range(0,test.shape[0])
-            test_minus_max_lags = test.shape[0] - self.max_lags
-            for row in range(test_minus_max_lags):
-                
-                block_all = test.loc[row:row + self.max_lags]
-                
-                ### EXOGENOUS PREDICTION LAYER
-                if step_ahead > 1:
-                    block = block_all.drop([self.target], axis=1)
-                    block_forecast = fo.exogenous_forecast(step_ahead-1, block, self.max_lags, self.dict_variables, self.G_list)
-                    block_nan = pd.concat([block_all, block_forecast])
-                else:
-                    block_nan = block_all
-                ###
-                
-                block_nan.index = range(0,block_nan.shape[0])
-                block_nan = block_nan.drop([0])
-                block_nan.index = range(0,block_nan.shape[0])
-                
-                for f in range(0,step_ahead):
-                    X = util.organize_block(block_nan.iloc[f:], self.G_list[self.target], self.max_lags)
-    
-                    if X.isnull().any().any():
-                        break
-                    else:
-                        residual = random.choice(self.dict_variables[self.target]['residuals'])
-                        forecast = model.predict(X.values) + residual
-                    
-                    try:
-                        block_nan[self.target].iloc[self.max_lags + f] = forecast
-                    except:
-                        df = pd.DataFrame(np.full([1, block_nan.shape[1],], np.nan), columns = block_nan.columns.values)
-                        block_nan = pd.concat([block_nan, df])
-                        block_nan[self.target].iloc[self.max_lags + f] = forecast
-                        
-
-                block_nan.index = range(0,block_nan.shape[0])
-                df_results[row] = block_nan[self.target].iloc[block_nan.shape[0]-step_ahead:].values
-           
-            if self.distributive_version:
-                if ray.is_initialized():
-                    ray.shutdown() 
-
-            return df_results
-    
-    # ENDOGENOUS PREDICTION LAYER
-    def predict_decom_ahead(self, step_ahead):
+    def predict_ahead(self, step_ahead):
             print("MODEL PREDICTING")
             test = self.test
         
@@ -277,8 +210,43 @@ class Marts():
 
             return df_results
         
-    def predict_decom(self):
-            print("MODEL PREDICTING 4")
+    def predict_ahead_prob(self, step_ahead):
+            print("MODEL PREDICTING")
+            test = self.test
+        
+            if self.distributive_version:
+                num_cpu = os.cpu_count()
+                
+                if not ray.is_initialized():
+                    ray.init(num_cpus=num_cpu)
+                
+            df_results = pd.DataFrame()
+        
+            #test.index = range(0,test.shape[0])
+            if self.test_size != 0:
+                test_minus_max_lags = test.shape[0] - self.max_lags
+            else:
+                test_minus_max_lags = 1
+            for row in range(test_minus_max_lags):
+                
+                block = test.loc[row:row + self.max_lags - 1]
+                block.index = range(0,block.shape[0])
+                
+                ### EXOGENOUS PREDICTION LAYER
+                block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list)
+                
+                imfs = block_forecast.filter(regex='IMF')
+                
+                df_results[row] = imfs.sum(axis=1).values
+           
+            if self.distributive_version:
+                if ray.is_initialized():
+                    ray.shutdown() 
+
+            return df_results
+        
+    def predict(self):
+            print("MODEL PREDICTING")
             test = self.test
             
             print(test.shape)
@@ -305,146 +273,9 @@ class Marts():
 
             return df_results.T
     
-    def predict_prob(self, step_ahead, prob_forecast=False):
-            test = self.test
-            test.index = range(0,test.shape[0])
-        
-            if self.distributive_version:
-                num_cpu = os.cpu_count()
-                
-                if not ray.is_initialized():
-                    ray.init(num_cpus=num_cpu)
-            
+   
 
-            variable_delete = []
-            test_columns_values = set(list(test.columns.values))
-            keys_G_list = set(self.G_list)
-            variable_delete  = test_columns_values - keys_G_list
-            test = test.drop(variable_delete, axis=1)
-        
-        
-            model = self.dict_variables[self.target]['trained_model']
-            residual = self.dict_variables[self.target]['residuals']
-                
-            df_results = pd.DataFrame()
-            df_distributions = pd.DataFrame()    
-        
-            test.index = range(0,test.shape[0])
-            test_minus_max_lags = test.shape[0] - self.max_lags
-            for row in range(test_minus_max_lags):
-                
-                block_all = test.loc[row:row + self.max_lags]
-                
-                ### EXOGENOUS PREDICTION LAYER
-                if step_ahead > 1:
-                    if block_all.shape[1] != 1:
-                        block = block_all.drop([self.target], axis=1)
-                    else:
-                        block = block_all
-                    block_forecast = fo.exogenous_forecast(step_ahead-1, block, self.max_lags, self.dict_variables, self.G_list)
-                    block_nan = pd.concat([block_all, block_forecast])
-                else:
-                    block_nan = block_all
-                ###
-                
-                
-                block_nan.index = range(0,block_nan.shape[0])
-                block_nan = block_nan.drop([0])
-                block_nan.index = range(0,block_nan.shape[0])
-                
-                distributions = []
-                for f in range(0,step_ahead):
-                    X = util.organize_block(block_nan.iloc[f:], self.G_list[self.target], self.max_lags)
     
-                    if X.isnull().any().any():
-                        break
-                    else:
-                        if prob_forecast:
-                            predictions_tree = np.array([tree.predict(X) for tree in model.estimators_])
-                            kde_predictions_tree = KernelDensity(kernel='gaussian', bandwidth=0.2).fit(predictions_tree.reshape((-1,1)))
-                        else:
-                            residual = random.choice(self.dict_variables[self.target]['residuals'])
-                            forecast = model.predict(X.values) + residual
-                    
-                    if prob_forecast:
-                        distributions.append(kde_predictions_tree)
-                    else:
-                        try:
-                            block_nan[self.target].iloc[self.max_lags + f] = forecast
-                                
-                        except:
-                            df = pd.DataFrame(np.full([1, block_nan.shape[1],], np.nan), columns = block_nan.columns.values)
-                            block_nan = pd.concat([block_nan, df])
-                            block_nan[self.target].iloc[self.max_lags + f] = forecast
-                        
-                
-                if prob_forecast:
-                    df_distributions[row] = distributions
-                else:
-                    block_nan.index = range(0,block_nan.shape[0])
-                    df_results[row] = block_nan[self.target].iloc[block_nan.shape[0]-step_ahead:].values
-           
-            if self.distributive_version:
-                if ray.is_initialized():
-                    ray.shutdown() 
-            if prob_forecast:       
-                return df_distributions
-            else:
-                return df_results
-
-    def retraining(self, dataset):
-        
-        dataset.index = range(0,dataset.shape[0])
-        
-        if self.distributive_version:
-            num_cpu = os.cpu_count()
-            
-            if not ray.is_initialized():
-                ray.init(num_cpus=num_cpu)
-        
-        #Empirical Mode Decomposition
-        if self.decomposition:
-            imf = emd.sift.sift(dataset[self.target].values, max_imfs = self.imfs.shape[1])
-            self.imfs = pd.DataFrame(imf, columns=(["IMF"+str(i) for i in range(1,imf.shape[1]+1)]))
-            dataset = pd.concat([dataset,self.imfs], axis=1)
-
-        
-        variable_delete = []
-        dataset_columns_values = set(list(dataset.columns.values))
-        keys_G_list = set(self.G_list)
-        variable_delete  = dataset_columns_values - keys_G_list
-        dataset = dataset.drop(variable_delete, axis=1)
-        variable_delete  = keys_G_list - dataset_columns_values
-        print(variable_delete)
-        # for k in variable_delete:
-        #     del self.G_list[k]
-        # for var in self.G_list:
-        #     for k in variable_delete:
-        #         if "IMF" in var:
-        #             del self.G_list[var][k]
-
-        
-        if self.decomposition:
-            train = dataset.loc[:dataset.shape[0]-self.test_size+1]
-            #train = train.drop(self.target, axis=1)
-            self.test = dataset.loc[dataset.shape[0]-self.test_size:]
-        else:
-            train = dataset.iloc[:dataset.shape[0]-self.test_size+1,:]
-            self.test = dataset.iloc[dataset.shape[0]-self.test_size:,:]
-            
-        # MODEL SELECTION LAYER
-        self.dict_datasets_train = util.get_datasets_all(train, self.G_list, self.max_lags, self.distributive_version)
-    
-        for variable in self.dict_datasets_train:
-            self.dict_variables[variable]["trained_model"], self.dict_variables[variable]["residuals"] = mg.evaluate_model(self.dict_variables[variable], self.dict_datasets_train[variable]['X_train'], self.dict_datasets_train[variable]['y_train'])
-            
-        # if self.save_model:
-        #     with open('model.pickle', 'wb') as f:
-        #         pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
-                
-        if self.distributive_version:
-            if ray.is_initialized():
-                ray.shutdown() 
 
               
         

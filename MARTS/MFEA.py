@@ -12,6 +12,7 @@ import random
 import ray
 from itertools import product
 import warnings
+from tqdm import tqdm
 
 
 
@@ -419,8 +420,9 @@ def GeneticAlgorithm(dataset, series, params, distributive_version):
     pop = [population]
     #best_zero = [population[0]]
     
-    for i in range(params['ngen']):
-        print("GENERATION {}".format(i))
+    for i in tqdm(range(params['ngen']), desc="Processing"):
+
+        #print("GENERATION {}".format(i))
 
         # Selection
         new_population = []

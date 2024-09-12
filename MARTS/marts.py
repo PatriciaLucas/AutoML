@@ -82,6 +82,7 @@ class Marts():
         
         
         #Empirical Mode Decomposition
+        print('FEATURE EXTRACTION LAYER')
         if self.decomposition:
             imf = emd.sift.sift(dataset[self.target].values)
             self.imfs = pd.DataFrame(imf, columns=(["IMF"+str(i) for i in range(1,imf.shape[1]+1)]))
@@ -96,6 +97,7 @@ class Marts():
             
 
         # FEATURE SELECTION LAYER
+        print('FEATURE SELECTION LAYER')
         try:
             self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
         except:
@@ -116,14 +118,14 @@ class Marts():
             if self.decomposition:
                 train = train.drop(self.target, axis=1)
                 self.test = self.test.drop(self.target, axis=1)
-                self.G_list = fs.causal_graph(train, "", self.max_lags)
+                self.G_list = fs.causal_graph(train.loc[:train.shape[0]/2], "", self.max_lags)
             else:
-                self.G_list = fs.causal_graph(train, self.target, self.max_lags)
+                self.G_list = fs.causal_graph(train.loc[:train.shape[0]/2], self.target, self.max_lags)
             print("Causal graph of variables")
             print(self.G_list.keys())
         else:
             print("Gera grafo completo")
-            self.G_list = fs.complete_graph(train, self.target, self.max_lags)        
+            self.G_list = fs.complete_graph(train.loc[:train.shape[0]/2], self.target, self.max_lags)         
         
         
         # DELETA VARIÁVEIS QUE NÃO ESTÃO NO GRAFO CAUSAL
@@ -146,6 +148,7 @@ class Marts():
             
     
         # MODEL SELECTION LAYER
+        print('MODEL SELECTION LAYER')
         self.dict_datasets_train = util.get_datasets_all(train, self.G_list, self.max_lags, self.distributive_version)
         
         try:

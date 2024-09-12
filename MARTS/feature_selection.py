@@ -141,7 +141,7 @@ def optimize_max_lags(dataset,target):
     lags = [5,10,15,20]
     
     for max_lags in lags:
-        G_list = causal_graph(dataset, target, max_lags)
+        G_list = complete_graph(dataset, target, max_lags)
         dict_dataset = util.get_datasets(dataset, G_list, max_lags, target)
         regr = OLS(np.array(dict_dataset['y_train'], dtype=float), 
                    add_constant(np.array(dict_dataset['y_train']))).fit()

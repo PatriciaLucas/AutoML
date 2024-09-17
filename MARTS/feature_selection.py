@@ -105,6 +105,23 @@ def causal_graph(dataset, target, max_lags):
             l.append(var)
 
 
+
+    set_l = set(l)
+    set_G_list = set(G_list)
+    set_intersection = set_l.intersection(set_G_list)
+    for k in set_intersection:
+        del G_list[k]
+    
+    for var in G_list:
+        set_G_list_var = set(G_list[var])
+        set_intersection = set_l.intersection(set_G_list_var)
+        for k in set_intersection:
+            del G_list[var][k]
+    
+    for var in G_list:
+        if np.all(G_list[var] == False):
+            l.append(var)
+    
     set_l = set(l)
     set_G_list = set(G_list)
     set_intersection = set_l.intersection(set_G_list)

@@ -15,12 +15,12 @@ import MFEA
 
 
 
-data = datasets.get_multivariate('ECONOMICS_3')
+data = datasets.get_multivariate('CLIMATIC_3')
 data.index = range(0,data.shape[0])
 
-data = data.loc[:1000]
+#data = data.loc[:1000]
 
-target = 'AVG'
+target = 'maxima'
 step_ahead = 3
 windows_size = .5
 test_size = .1
@@ -41,7 +41,7 @@ params_MFEA = {
     'size_test': j_MFEA*0.2
     }
 
-model = marts.Marts(params_MFEA = params_MFEA, feature_selection = True, distributive_version = True, 
+model = marts.Marts(params_MFEA = params_MFEA, feature_selection = True, distributive_version = False, 
                     save_model = False, decomposition = True, test_size=dataset.shape[0]*test_size, size_dataset_optimize_max_lags=3,
                     optimize_hiperparams = True)
 model.fit(dataset, target)

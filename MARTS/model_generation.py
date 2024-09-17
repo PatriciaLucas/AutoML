@@ -26,6 +26,7 @@ def initialize_model_layer(dict_datasets_train, target, series, params_MFEA, dis
     # Dictionary that stores the ensembles of each variable in the database.
     dict_variables = dict.fromkeys(list(dict_datasets_train.keys()), {})
     if optimize_hiperparams:
+        print(series.shape)
         hps, pop = MFEA.GeneticAlgorithm(dict_datasets_train, series, params_MFEA, distributive_version)
         hp = hps[-1]
     else:

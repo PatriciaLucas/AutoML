@@ -23,14 +23,16 @@ data.index = range(0,data.shape[0])
 target = 'maxima'
 step_ahead = 3
 windows_size = .5
-test_size = .1
+test_size = 30
 w = int(data.shape[0] * windows_size)
 d = int(.2 * w)
 i=0
 
 dataset = data[i*d:(i*d)+w]
 
-j_MFEA = (dataset.shape[0]-dataset.shape[0]*test_size)/3
+train, test = dataset.head(int(dataset.shape[0]-test_size)), dataset.tail(test_size)
+
+j_MFEA = (train.shape[0]-train.shape[0]*test_size)/3
 
 params_MFEA = {
     'npop': 4,
@@ -42,9 +44,9 @@ params_MFEA = {
     }
 
 model = marts.Marts(params_MFEA = params_MFEA, feature_selection = True, distributive_version = False, 
-                    save_model = False, decomposition = True, test_size=dataset.shape[0]*test_size, size_dataset_optimize_max_lags=3,
+                    save_model = False, decomposition = True, test_size=test_size, size_dataset_optimize_max_lags=3,
                     optimize_hiperparams = True)
-model.fit(dataset, target)
+model.fit(train, target)
 
 
 df_results = model.predict_decom(step_ahead=1)

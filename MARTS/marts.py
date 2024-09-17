@@ -6,10 +6,10 @@ Created on Tue Sep  5 08:17:53 2023
 """
 
 
-from MARTS import feature_selection as fs
-from MARTS import model_generation as mg
-from MARTS import util
-from MARTS import forecast as fo
+import feature_selection as fs
+import model_generation as mg
+import util
+import forecast as fo
 
 import pandas as pd
 import numpy as np

@@ -139,7 +139,8 @@ def causal_graph(dataset, target, max_lags):
             set_intersection = set_l.intersection(set_G_list_var)
             for k in set_intersection:
                 del G_list[var][k]
-            
+                
+        l = []    
         
     return G_list
 

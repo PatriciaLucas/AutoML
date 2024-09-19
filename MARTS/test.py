@@ -32,7 +32,7 @@ dataset = data[i*d:(i*d)+w]
 
 train, test = dataset.head(int(dataset.shape[0]-test_size)), dataset.tail(test_size)
 
-j_MFEA = (train.shape[0]-train.shape[0]*test_size)/3
+j_MFEA = (train.shape[0])/3
 
 params_MFEA = {
     'npop': 4,

@@ -52,13 +52,10 @@ def get_univariate(name, target):
         return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_4.csv', index_col=('Date'))[target]
     elif name == 'IOT_5':
         return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_5.csv', index_col=('Date'))[target]
+    elif name == 'IOT_6':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_6.csv', index_col=('Date'))[target]
    
-    
-    
-    
-    
-    
-    
+
     
     else:
         return "There is no dataset with that name."
@@ -109,5 +106,7 @@ def get_multivariate(name):
         return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_4.csv', index_col=('Date'))
     elif name == 'IOT_5':
         return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_5.csv', index_col=('Date'))
+    elif name == 'IOT_6':
+        return pd.read_csv('https://raw.githubusercontent.com/PatriciaLucas/AutoML/main/Datasets/IOT_6.csv', index_col=('Date'))
     else:
         return "There is no dataset with that name."

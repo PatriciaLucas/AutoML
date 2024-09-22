@@ -75,7 +75,10 @@ def LGBoost_depth(tree):
             left_depth = LGBoost_depth(tree['left_child'])
         except:
             left_depth = 1
-        right_depth = LGBoost_depth(tree['right_child'])
+        try:
+            right_depth = LGBoost_depth(tree['right_child'])
+        except:
+            right_depth = 1
         return max(left_depth, right_depth) + 1
 
 def XGBoost_depth(tree_dump):

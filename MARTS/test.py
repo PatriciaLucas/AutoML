@@ -15,12 +15,12 @@ import MFEA
 
 
 
-data = datasets.get_multivariate('CLIMATIC_3')
+data = datasets.get_multivariate('IOT_3')
 data.index = range(0,data.shape[0])
 
 #data = data.loc[:1000]
 
-target = 'maxima'
+target = 'Global_active_power'
 step_ahead = 3
 windows_size = .5
 test_size = 30

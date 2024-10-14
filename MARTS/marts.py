@@ -6,7 +6,7 @@ Created on Tue Sep  5 08:17:53 2023
 """
 
 
-import feature_selection as fs
+from MARTS import feature_selection as fs
 from MARTS import model_generation as mg
 from MARTS import util
 from MARTS import forecast as fo
@@ -146,6 +146,13 @@ class Marts():
         
         if variable_delete:
             print(f"Variables {variable_delete} were deleted because they did not have predictive lags.")
+            
+            
+        #DENOISING TRAINING TECHNIQUE (seleciona 50% das amostras de uma coluna e insere o ruído na amostra)
+        for variable in train.columns:
+            index_rows = train[variable].sample(frac=0.5, random_state=42).index
+            train.loc[index_rows, variable] = train.loc[index_rows, variable] + random.random() * np.random.normal(loc=0, scale=1) * train[variable].std()
+        
             
     
         # MODEL SELECTION LAYER

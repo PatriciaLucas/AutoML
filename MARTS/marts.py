@@ -98,12 +98,12 @@ class Marts():
             
 
         # FEATURE SELECTION LAYER
-        print('FEATURE SELECTION LAYER')
-        try:
-            self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
-        except:
-            self.max_lags = 5
-        print(f"Lag window size: {self.max_lags}")
+        # print('FEATURE SELECTION LAYER')
+        # try:
+        #     self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
+        # except:
+        #     self.max_lags = 5
+        # print(f"Lag window size: {self.max_lags}")
         
         #Separa os dados de teste de acordo com os lags
         self.test = dataset.loc[dataset.shape[0]-self.test_size-self.max_lags:]

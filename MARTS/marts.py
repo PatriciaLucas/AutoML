@@ -98,12 +98,13 @@ class Marts():
             
 
         # FEATURE SELECTION LAYER
-        # print('FEATURE SELECTION LAYER')
-        # try:
-        #     self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
-        # except:
-        #     self.max_lags = 5
-        # print(f"Lag window size: {self.max_lags}")
+        print('FEATURE SELECTION LAYER')
+        try:
+            self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
+        except:
+            # Em caso de séries IMFs constantes
+            self.max_lags = 5
+        print(f"Lag window size: {self.max_lags}")
         
         #Separa os dados de teste de acordo com os lags
         self.test = dataset.loc[dataset.shape[0]-self.test_size-self.max_lags:]
@@ -148,10 +149,10 @@ class Marts():
             print(f"Variables {variable_delete} were deleted because they did not have predictive lags.")
             
             
-        #DENOISING TRAINING TECHNIQUE (seleciona 50% das amostras de uma coluna e insere o ruído na amostra)
-        for variable in train.columns:
-            index_rows = train[variable].sample(frac=0.5, random_state=42).index
-            train.loc[index_rows, variable] = train.loc[index_rows, variable] + random.random() * np.random.normal(loc=0, scale=1) * train[variable].std()
+        # #DENOISING TRAINING TECHNIQUE (seleciona 50% das amostras de uma coluna e insere o ruído na amostra)
+        # for variable in train.columns:
+        #     index_rows = train[variable].sample(frac=0.5, random_state=42).index
+        #     train.loc[index_rows, variable] = train.loc[index_rows, variable] + random.random() * np.random.normal(loc=0, scale=1) * train[variable].std()
         
             
     
@@ -245,6 +246,7 @@ class Marts():
                 
                 ### EXOGENOUS PREDICTION LAYER
                 block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list)
+                
                 
                 imfs = block_forecast.filter(regex='IMF')
                 

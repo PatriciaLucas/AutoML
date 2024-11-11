@@ -74,6 +74,6 @@ def until_organize_block_prob(block, G_list, max_lags, variable, dict_variables)
     model = dict_variables[variable]['trained_model']
     X_input = util.organize_block(block, G_list[variable], max_lags)
     forecast = model.predict(X_input.values)[0]
-    residual = random.choice(dict_variables[variable]['residuals'])
-    return residual + forecast        
+    #residual = random.choice(dict_variables[variable]['residuals'])
+    return forecast        
         

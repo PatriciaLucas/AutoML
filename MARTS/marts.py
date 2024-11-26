@@ -99,11 +99,11 @@ class Marts():
 
         # FEATURE SELECTION LAYER
         print('FEATURE SELECTION LAYER')
-        try:
-            self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
-        except:
+        #try:
+         #   self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
+        #except:
             # Em caso de séries IMFs constantes
-            self.max_lags = 5
+        self.max_lags = 20
         print(f"Lag window size: {self.max_lags}")
         
         #Separa os dados de teste de acordo com os lags

@@ -15,15 +15,15 @@ import MFEA
 
 
 
-data = datasets.get_multivariate('IOT_3')
+data = datasets.get_multivariate('ECONOMICS_1').iloc[:2000]
 data.index = range(0,data.shape[0])
 
 #data = data.loc[:1000]
 
-target = 'Global_active_power'
+target = 'AVG'
 step_ahead = 3
 windows_size = .5
-test_size = 30
+test_size = 0
 w = int(data.shape[0] * windows_size)
 d = int(.2 * w)
 i=0
@@ -44,12 +44,12 @@ params_MFEA = {
     }
 
 model = marts.Marts(params_MFEA = params_MFEA, feature_selection = True, distributive_version = False, 
-                    save_model = False, decomposition = True, test_size=test_size, size_dataset_optimize_max_lags=3,
+                    save_model = False, decomposition = False, test_size=test_size, size_dataset_optimize_max_lags=3,
                     optimize_hiperparams = True)
 model.fit(train, target)
 
 
-df_results = model.predict_decom(step_ahead=1)
+df_results = model.predict_ahead_mult(step_ahead=1, target=target)
 
 a = model.dict_datasets_test
 

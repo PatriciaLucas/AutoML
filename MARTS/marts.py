@@ -90,11 +90,8 @@ class Marts():
             self.imfs = pd.DataFrame(imf, columns=(["IMF"+str(i) for i in range(1,imf.shape[1]+1)]))
             dataset = pd.concat([dataset,self.imfs], axis=1)
             train = dataset.loc[:dataset.shape[0]-self.test_size+1]
-            #self.test = dataset.loc[dataset.shape[0]-self.test_size:]
-            #self.target_test = self.train[self.target]
         else:
             train = dataset.loc[:dataset.shape[0]-self.test_size+1]
-            #self.test = dataset.loc[dataset.shape[0]-self.test_size:]
             
 
         # FEATURE SELECTION LAYER
@@ -108,8 +105,6 @@ class Marts():
         
         #Separa os dados de teste de acordo com os lags
         self.test = dataset.loc[dataset.shape[0]-self.test_size-self.max_lags:]
-        #self.target_test = dataset.loc[dataset.shape[0]-self.test_size:][self.target]
-        #self.target_test.index = range(0,self.target_test.shape[0])
         
         if self.test_size != 0:
           self.target_test = dataset.loc[dataset.shape[0]-self.test_size:][self.target]
@@ -120,9 +115,9 @@ class Marts():
             if self.decomposition:
                 train = train.drop(self.target, axis=1)
                 self.test = self.test.drop(self.target, axis=1)
-                self.G_list = fs.causal_graph(train.loc[:train.shape[0]/2], "", self.max_lags)
+                self.G_list = fs.causal_graph(train.loc[:train.shape[0]], "", self.max_lags)
             else:
-                self.G_list = fs.causal_graph(train.loc[:train.shape[0]/2], self.target, self.max_lags)
+                self.G_list = fs.causal_graph(train.loc[:train.shape[0]], self.target, self.max_lags)
             print("Causal graph of variables")
             print(self.G_list.keys())
         else:
@@ -215,14 +210,12 @@ class Marts():
             if self.distributive_version:
                 if ray.is_initialized():
                     ray.shutdown() 
-                    
-            #Retira os lags finais do treino
-            #self.test = self.test.loc[self.max_lags:]
-            #self.test.index = range(0,self.test.shape[0])
 
             return df_results
         
-    def predict_ahead_prob(self, step_ahead):
+        
+        
+    def predict_ahead_mult(self, step_ahead, target):
             print("MODEL PREDICTING")
             test = self.test
         
@@ -240,17 +233,16 @@ class Marts():
             else:
                 test_minus_max_lags = 1
             for row in range(test_minus_max_lags):
-                
+                print(row)
                 block = test.loc[row:row + self.max_lags - 1]
                 block.index = range(0,block.shape[0])
                 
                 ### EXOGENOUS PREDICTION LAYER
                 block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list)
                 
+                print(block_forecast)
                 
-                imfs = block_forecast.filter(regex='IMF')
-                
-                df_results[row] = imfs.sum(axis=1).values
+                df_results = block_forecast
            
             if self.distributive_version:
                 if ray.is_initialized():
@@ -258,33 +250,6 @@ class Marts():
 
             return df_results
         
-    def predict(self):
-            print("MODEL PREDICTING")
-            test = self.test
-            
-            print(test.shape)
-        
-            if self.distributive_version:
-                num_cpu = os.cpu_count()
-                
-                if not ray.is_initialized():
-                    ray.init(num_cpus=num_cpu)
-                
-            df_results = pd.DataFrame()
-            
-            self.dict_datasets_test = util.get_datasets_all(test, self.G_list, self.max_lags, self.distributive_version)
-            
-            forecast = pd.DataFrame(columns=self.dict_datasets_test.keys())
-
-            for variable in self.dict_datasets_train:
-                model = self.dict_variables[variable]['trained_model']
-                forecast[variable] = model.predict(self.dict_datasets_test[variable]['X_train'])
-            
-            imfs = forecast.filter(regex='IMF')
-            
-            df_results = pd.DataFrame(imfs.sum(axis=1).values)
-
-            return df_results.T
     
    
 

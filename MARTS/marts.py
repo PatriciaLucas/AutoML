@@ -233,14 +233,11 @@ class Marts():
             else:
                 test_minus_max_lags = 1
             for row in range(test_minus_max_lags):
-                print(row)
                 block = test.loc[row:row + self.max_lags - 1]
                 block.index = range(0,block.shape[0])
                 
                 ### EXOGENOUS PREDICTION LAYER
                 block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list)
-                
-                print(block_forecast)
                 
                 df_results = block_forecast
            

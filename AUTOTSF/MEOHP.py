@@ -432,7 +432,7 @@ def GeneticAlgorithm(dataset, series, params, distributive_version):
 
         # Selection
         new_population = []
-        for j in range(int(params['npop'] * params['psel'])):
+        for j in range(int(params['npop'] * 0.5)):
             new_population.append(double_tournament(population, i))  
 
 
@@ -486,16 +486,6 @@ def GeneticAlgorithm(dataset, series, params, distributive_version):
             best_list.append(population[df_best[[var]].idxmin()[0]])
             
         df_best_list.append(best_list)
-
-        
-        # if best_zero[-2]['scalar_fitness'] >= best_zero[-1]['scalar_fitness']:
-        #     no_improvement_count +=1
-        #     print("WITHOUT IMPROVEMENT {}".format(no_improvement_count))
-        # else:
-        #     no_improvement_count = 0
-        
-        # if no_improvement_count == params['mgen']:
-        #     break
         
         pop.append(population)
         

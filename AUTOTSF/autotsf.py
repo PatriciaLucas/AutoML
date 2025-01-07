@@ -26,7 +26,7 @@ import datetime
 
 class AUTOTSF():
     def __init__(self, 
-                 params_MFEA = {'npop': 20,'ngen': 10,'mgen': 5,'psel': 0.5,'size_train': 100,'size_test': 50,}, 
+                 params_MEOHP = {'npop': 20,'ngen': 10,'size_train': 100,'size_test': 50,}, 
                  feature_selection = True, 
                  distributive_version = True,
                  save_model = True,
@@ -37,7 +37,7 @@ class AUTOTSF():
                  size_dataset_optimize_max_lags = 3,
                  optimize_hiperparams = True
                  ):
-        self.params_MFEA = params_MFEA
+        self.params_MEOHP = params_MEOHP
         self.feature_selection = feature_selection
         self.distributive_version = distributive_version
         self.save_model = save_model
@@ -106,12 +106,12 @@ class AUTOTSF():
             
 
         # FEATURE SELECTION LAYER
-        print('FEATURE SELECTION LAYER')
+        
         #try:
          #   self.max_lags = fs.optimize_max_lags(train.loc[:train.shape[0]/self.size_dataset_optimize_max_lags], self.target)
         #except:
             # Em caso de séries IMFs constantes
-        self.max_lags = 5
+        
         print(f"Lag window size: {self.max_lags}")
         
         #Separa os dados de teste de acordo com os lags
@@ -129,10 +129,10 @@ class AUTOTSF():
                 self.G_list = fs.causal_graph(train.loc[:train.shape[0]/3], "", self.max_lags)
             else:
                 self.G_list = fs.causal_graph(train.loc[:train.shape[0]/3], self.target, self.max_lags)
-            print("Causal graph of variables")
+            print('FEATURE SELECTION LAYER - CAUSAL')
             print(self.G_list.keys())
         else:
-            print("Gera grafo completo")
+            #print("Gera grafo completo")
             self.G_list = fs.complete_graph(train.loc[:train.shape[0]/3], self.target, self.max_lags)         
         
         
@@ -172,7 +172,7 @@ class AUTOTSF():
         except:
             self.num_variables = 0
         
-        self.dict_variables, self.hp = mg.initialize_model_layer(self.dict_datasets_train, self.target, train, self.params_MFEA, self.distributive_version, self.optimize_hiperparams)
+        self.dict_variables, self.hp = mg.initialize_model_layer(self.dict_datasets_train, self.target, train, self.params_MEOHP, self.distributive_version, self.optimize_hiperparams)
 
         for variable in self.dict_datasets_train:
             self.dict_variables[variable]["trained_model"], self.dict_variables[variable]["residuals"] = mg.evaluate_model(self.dict_variables[variable], self.dict_datasets_train[variable]['X_train'], self.dict_datasets_train[variable]['y_train'])

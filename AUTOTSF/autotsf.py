@@ -232,7 +232,7 @@ class AUTOTSF():
         
         
         
-    def predict_ahead_mult(self, step_ahead, target):
+    def predict_ahead_multivariate(self, step_ahead):
             test = self.test
         
             if self.distributive_version:

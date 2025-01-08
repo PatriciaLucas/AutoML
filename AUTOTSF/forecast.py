@@ -29,10 +29,11 @@ def exogenous_forecast(step_ahead, block, max_lags, dict_variables, G_list, dist
             for variable in block.columns.values.tolist():
                 p.append(until_organize_block.remote(block, G_list, max_lags, variable, dict_variables))
             parallel_p = ray.get(p)
-            #block.loc[block.shape[0]] = parallel_p
-            block = pd.concat([block, pd.DataFrame([parallel_p])], ignore_index=True)
-            #block_forecast.loc[block_forecast.shape[0]] = parallel_p
-            block_forecast = pd.concat([block_forecast, pd.DataFrame([parallel_p])], ignore_index=True)
+            block = block.copy()
+            block.loc[block.shape[0]] = parallel_p
+            block_forecast = block_forecast.copy()
+            block_forecast.loc[block_forecast.shape[0]] = parallel_p
+            
         else:
             p = []
             for variable in block.columns.values.tolist():
@@ -41,10 +42,11 @@ def exogenous_forecast(step_ahead, block, max_lags, dict_variables, G_list, dist
                 forecast = model.predict(X_input.values)[0]
                 residual = np.mean(dict_variables[variable]['residuals'])
                 p.append(forecast + residual)
-            #block.loc[block.shape[0]] = p
-            block = pd.concat([block, pd.DataFrame([p])], ignore_index=True)
-            #block_forecast.loc[block_forecast.shape[0]] = p
-            block_forecast = pd.concat([block_forecast, pd.DataFrame([p])], ignore_index=True)
+            block = block.copy()
+            block.loc[block.shape[0]] = p
+            block_forecast = block_forecast.copy()
+            block_forecast.loc[block_forecast.shape[0]] = p
+            
 
         #parallel_p = ray.get(p)
         #block.loc[block.shape[0]] = parallel_p

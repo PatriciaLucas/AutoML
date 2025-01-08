@@ -64,7 +64,7 @@ class AUTOTSF():
 
 
     def fit(self, dataset, target):
-        
+        start = datetime.datetime.now()
         print(f"Start time: {datetime.datetime.now()}")
         
         dataset.index = range(0,dataset.shape[0])
@@ -189,7 +189,10 @@ class AUTOTSF():
             
         if self.distributive_version:
             if ray.is_initialized():
-                ray.shutdown()  
+                ray.shutdown()
+        
+        
+        print(f"Run time: {start - datetime.datetime.now()}")
         
     
     # ENDOGENOUS PREDICTION LAYER

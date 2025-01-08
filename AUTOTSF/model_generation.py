@@ -51,6 +51,7 @@ def initialize_model_layer(dict_datasets_train, target, series, params_MFEA, dis
 
 def evaluate_model(dict_model, X_train, y_train):
     warnings.filterwarnings("ignore", category=UserWarning)
+    warnings.filterwarnings("ignore", category=FutureWarning)
     
     X_train_copy = X_train.copy()
     y_train_copy = y_train.copy()

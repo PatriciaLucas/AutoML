@@ -123,16 +123,16 @@ class AUTOTSF():
         
         
         if self.feature_selection:
+            print('FEATURE SELECTION LAYER - CAUSAL')
             if self.decomposition:
                 train = train.drop(self.target, axis=1)
                 self.test = self.test.drop(self.target, axis=1)
                 self.G_list = fs.causal_graph(train.loc[:train.shape[0]/3], "", self.max_lags)
             else:
                 self.G_list = fs.causal_graph(train.loc[:train.shape[0]/3], self.target, self.max_lags)
-            print('FEATURE SELECTION LAYER - CAUSAL')
-            print(self.G_list.keys())
+        
+            print(f'THE CAUSAL GRAPH CONTAINS THE FOLLOWING VARIABLES: {list(self.G_list.keys())}')
         else:
-            #print("Gera grafo completo")
             self.G_list = fs.complete_graph(train.loc[:train.shape[0]/3], self.target, self.max_lags)         
         
         
@@ -191,7 +191,6 @@ class AUTOTSF():
     
     # ENDOGENOUS PREDICTION LAYER
     def predict_ahead(self, step_ahead):
-            print("MODEL PREDICTING")
             test = self.test
         
             if self.distributive_version:
@@ -213,7 +212,7 @@ class AUTOTSF():
                 block.index = range(0,block.shape[0])
                 
                 ### EXOGENOUS PREDICTION LAYER
-                block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list)
+                block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list, self.distributive_version)
                 
                 imfs = block_forecast.filter(regex='IMF')
                 
@@ -228,7 +227,6 @@ class AUTOTSF():
         
         
     def predict_ahead_mult(self, step_ahead, target):
-            print("MODEL PREDICTING")
             test = self.test
         
             if self.distributive_version:

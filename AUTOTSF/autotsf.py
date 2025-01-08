@@ -20,6 +20,9 @@ import pickle
 import emd
 from sklearn.neighbors import KernelDensity
 import datetime
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 
@@ -247,7 +250,7 @@ class AUTOTSF():
                 block.index = range(0,block.shape[0])
                 
                 ### EXOGENOUS PREDICTION LAYER
-                block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list)
+                block_forecast = fo.exogenous_forecast(step_ahead, block, self.max_lags, self.dict_variables, self.G_list, self.distributive_version)
                 
                 df_results = block_forecast
            

@@ -16,7 +16,8 @@ from statsmodels.regression.linear_model import OLS
 from statsmodels.tools import add_constant
 
 import warnings
-warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 def organize_graph(G, var_names, target):
     """

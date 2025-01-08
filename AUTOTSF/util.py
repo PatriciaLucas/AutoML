@@ -7,6 +7,9 @@ Created on Mon Aug 28 08:58:44 2023
 
 import pandas as pd
 import ray
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 def organize_dataset(dataset, G, max_lags, target):
     dataset.index = range(0,dataset.shape[0])

@@ -13,6 +13,9 @@ import ray
 from itertools import product
 import warnings
 from tqdm import tqdm
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 

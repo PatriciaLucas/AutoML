@@ -192,7 +192,7 @@ class AUTOTSF():
                 ray.shutdown()
         
         
-        print(f"Run time: {start - datetime.datetime.now()}")
+        print(f"Run time: {datetime.datetime.now() - start}")
         
     
     # ENDOGENOUS PREDICTION LAYER

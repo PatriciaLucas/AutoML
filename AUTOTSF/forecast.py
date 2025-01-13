@@ -41,7 +41,8 @@ def exogenous_forecast(step_ahead, block, max_lags, dict_variables, G_list, dist
                 X_input = util.organize_block(block, G_list[variable], max_lags)
                 forecast = model.predict(X_input.values)[0]
                 residual = np.mean(dict_variables[variable]['residuals'])
-                p.append(forecast + residual)
+                #p.append(forecast + residual)
+                p.append(forecast)
             block = block.copy()
             block.loc[block.shape[0]] = p
             block_forecast = block_forecast.copy()
@@ -63,7 +64,8 @@ def until_organize_block(block, G_list, max_lags, variable, dict_variables):
     X_input = util.organize_block(block, G_list[variable], max_lags)
     forecast = model.predict(X_input.values)[0]
     residual = np.mean(dict_variables[variable]['residuals'])
-    return forecast + residual
+    #return forecast + residual
+    return forecast
 
 
 

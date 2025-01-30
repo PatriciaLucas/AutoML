@@ -109,7 +109,7 @@ def evaluate(dataset, individual, params):
 
     """
     
-    from AUTOTSF import measures
+    from AUTODCETS import measures
     from sklearn.ensemble import RandomForestRegressor
     from lightgbm import LGBMRegressor
     from xgboost import XGBRegressor

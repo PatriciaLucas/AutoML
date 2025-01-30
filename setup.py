@@ -2,7 +2,7 @@ import setuptools
 from setuptools import find_packages
 
 setuptools.setup(
-    name='MARTS',
+    name='AutoCDE-TS',
     install_requires=[
           'numpy',
           'pandas',
@@ -16,11 +16,11 @@ setuptools.setup(
           ],
     packages=find_packages(),
     version='1.0',
-    description='Auto-TSF',
+    description='AutoCDE-TS',
     long_description='Automator Machine Learning Based on Decomposition, Causality and Evolutionary Multitask Optimization for Time Series Forecasting',
     long_description_content_type="text/markdown",
     author='Patrícia de Oliveira e Lucas',
-    author_email='patelucas@gmail.com',
+    author_email='patricia.lucas@ifnmg.edu.com',
     url='',
     download_url='',
     keywords=['Time Series Forecasting', 'causal', 'Decomposition', 'Machine Learning', 'AuotML', 'Evolutionary Multitask Optimization', 'Causality'],

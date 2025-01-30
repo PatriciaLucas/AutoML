@@ -8,24 +8,19 @@ Created on Tue Aug 22 13:49:15 2023
 # ENSEMBLE LAYER
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
-from AUTOTSF import MEOHP
+from AUTODCE-TS import MEOHP
 import random
 from lightgbm import LGBMRegressor
 from xgboost import XGBRegressor
 import warnings
 
 
-def random_model():
-    #name_model = np.random.choice(['RandomForest'], size=1, replace=False)[0]
-    name_model = np.random.choice(['LGBMRegressor'], size=1, replace=False)[0]
-    return name_model
-
 
 def initialize_model_layer(dict_datasets_train, target, series, params_MFEA, distributive_version, optimize_hiperparams):   
 
     # Dictionary that stores the ensembles of each variable in the database.
     dict_variables = dict.fromkeys(list(dict_datasets_train.keys()), {})
-    if optimize_hiperparams:
+    if optimize_hiperparams:  
         hps, pop = MEOHP.GeneticAlgorithm(dict_datasets_train, series, params_MFEA, distributive_version)
         hp = hps[-1]
     else:
@@ -33,14 +28,10 @@ def initialize_model_layer(dict_datasets_train, target, series, params_MFEA, dis
         for i in range(len(dict_variables)):
             hp.append(dict(n_estimators=random.randint(5, 1000), min_samples_leaf = random.randint(1, 30), max_features = random.choice(['sqrt', 'log2'])))
     
-    print("MODEL TRAINING")
     v = 0 #variável que percorre o vetor de indivíduos retornado pelo MFEA na ordem das variáveis do dataset
     for variable in dict_variables:
-        #dict_ensemble = dict.fromkeys(list(range(0, num_model)), None)
         #Dictionary that stores the information of each model.
         dict_model =  {"name": hp[v]['model'], "hiperparam": hp[v], "trained_model": None, "residuals":None}
-        #Dictionary that stores the models of each ensemble.
-        #dict_ensemble[num_model] = dict_model
         dict_variables[variable] = dict_model
         v = v + 1
     
@@ -73,10 +64,7 @@ def evaluate_model(dict_model, X_train, y_train):
                                   min_child_weight = dict_model['hiperparam']['min_samples_leaf'],
                                   subsample = 0.5)
         model.fit(X_train_copy.values, y_train_copy.values)
-        
-    
-    
-    
+
     del X_train
     del y_train
     

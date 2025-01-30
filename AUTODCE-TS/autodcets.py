@@ -6,10 +6,10 @@ Created on Tue Sep  5 08:17:53 2023
 """
 
 
-from AUTOTSF import feature_selection as fs
-from AUTOTSF import model_generation as mg
-from AUTOTSF import util
-from AUTOTSF import forecast as fo
+from AUTODCE-TS import feature_selection as fs
+from AUTODCE-TS import model_generation as mg
+from AUTODCE-TS import util
+from AUTODCE-TS import forecast as fo
 
 import pandas as pd
 import numpy as np
@@ -27,7 +27,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 
-class AUTOTSF():
+class AUTODCE-TS():
     def __init__(self, 
                  params_MEOHP = {'npop': 20,'ngen': 10,'size_train': 100,'size_test': 50,}, 
                  feature_selection = True, 
@@ -60,7 +60,7 @@ class AUTOTSF():
         self.optimize_hiperparams = optimize_hiperparams
         self.pca = []
         self.hp = []
-        self.num_variables = 0
+        #self.num_variables = 0
 
 
     def fit(self, dataset, target):
@@ -115,7 +115,6 @@ class AUTOTSF():
         #except:
             # Em caso de séries IMFs constantes
         
-        print(f"Lag window size: {self.max_lags}")
         
         #Separa os dados de teste de acordo com os lags
         self.test = dataset.loc[dataset.shape[0]-self.test_size-self.max_lags:]
@@ -170,10 +169,10 @@ class AUTOTSF():
         print('MODEL SELECTION LAYER')
         self.dict_datasets_train = util.get_datasets_all(train, self.G_list, self.max_lags, self.distributive_version)
         
-        try:
-            self.num_variables = self.dict_datasets_train[self.target]['X_train'].shape[1]
-        except:
-            self.num_variables = 0
+        #try:
+        #    self.num_variables = self.dict_datasets_train[self.target]['X_train'].shape[1]
+        #except:
+        #    self.num_variables = 0
         
         self.dict_variables, self.hp = mg.initialize_model_layer(self.dict_datasets_train, self.target, train, self.params_MEOHP, self.distributive_version, self.optimize_hiperparams)
 

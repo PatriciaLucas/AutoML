@@ -5,7 +5,7 @@ Created on Thu Aug 31 14:53:57 2023
 @author: Patricia
 """
 
-from AUTODCE-TS import util
+from AUTODCETS import util
 
 import ray
 import random

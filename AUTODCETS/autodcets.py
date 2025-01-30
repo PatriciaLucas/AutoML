@@ -6,10 +6,10 @@ Created on Tue Sep  5 08:17:53 2023
 """
 
 
-from AUTODCE-TS import feature_selection as fs
-from AUTODCE-TS import model_generation as mg
-from AUTODCE-TS import util
-from AUTODCE-TS import forecast as fo
+from AUTODCETS import feature_selection as fs
+from AUTODCETS import model_generation as mg
+from AUTODCETS import util
+from AUTODCETS import forecast as fo
 
 import pandas as pd
 import numpy as np
@@ -27,7 +27,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 
-class AUTODCE-TS():
+class AUTODCETS():
     def __init__(self, 
                  params_MEOHP = {'npop': 20,'ngen': 10,'size_train': 100,'size_test': 50,}, 
                  feature_selection = True, 

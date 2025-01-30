@@ -4,7 +4,7 @@ Created on Mon Aug 21 07:58:04 2023
 
 @author: Patricia
 """
-from AUTODCE-TS import util
+from AUTODCETS import util
 
 import pandas as pd
 import numpy as np
